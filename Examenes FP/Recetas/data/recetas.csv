@@ -1,0 +1,101 @@
+nombre,tipo,dificultad,ingredientes,tiempo_preparacion,calorias,fecha_creacion,precio_estimado
+Tarta de Manzana,Postre,Baja,"manzanas, azúcar, harina, huevo, canela, mantequilla, sal",60,200,2024-01-08,15.99
+Spaghetti Bolognese,Plato principal,Media,"pasta, carne molida, tomate, cebolla, ajo",45,400,2024-01-09,12.50
+Ensalada César,Entrante,Baja,"lechuga, pollo, crutones, aderezo, parmesano",20,250,2024-01-10,8.99
+Sopa de Calabaza,Entrante,Baja,"calabaza, cebolla, caldo de pollo, zanahoria, ajo",30,150,2024-01-11,9.95
+Pasta Alfredo,Plato principal,Baja,"pasta, crema, queso parmesano, mantequilla, ajo",25,350,2024-01-12,10.75
+Tacos de Pollo,Plato principal,Media,,30,300,2024-01-13,14.99
+Ensalada de Frutas,Postre,Baja,"fresas, piña, kiwi, menta, naranja",15,120,2024-01-14,7.50
+Lasaña,Plato principal,Media,"pasta, carne molida, tomate, queso, espinacas",60,450,2024-01-15,16.50
+Sushi,Entrante,Media,,50,380,2024-01-16,18.25
+Risotto de Champiñones,Plato principal,Media,"arroz, champiñones, caldo de verduras, cebolla, vino blanco",40,320,2024-01-17,13.99
+Hamburguesa con Queso,Plato principal,Baja,"carne de res, pan, queso, lechuga, tomate",35,500,2024-01-18,11.25
+Papas Asadas,Acompañamiento,Baja,"papas, aceite de oliva, sal, pimienta, romero",40,180,2024-01-19,6.99
+Mousse de Chocolate,Postre,Baja,"chocolate, nata, azúcar, huevos, vainilla, limón",15,300,2024-01-20,9.50
+Pizza Margarita,Plato principal,Baja,"masa de pizza, tomate, mozzarella, albahaca, aceite de oliva",30,420,2024-01-21,14.00
+Ceviche de Camarones,Entrante,Baja,,20,200,2024-01-22,17.50
+Pollo a la Parrilla,Plato principal,Baja,"pollo, sal, pimienta, limón, ajo",40,350,2024-01-23,12.99
+Ensalada de Atún,Entrante,Baja,"atún enlatado, lechuga, tomate, aceitunas, cebolla",15,180,2024-01-24,9.25
+Arroz con Verduras,Acompañamiento,Baja,"arroz, zanahoria, guisantes, cebolla, aceite de oliva",25,220,2024-01-25,6.75
+Tarta de Chocolate,Postre,Baja,"chocolate, harina, azúcar, huevo, mantequilla",50,280,2024-01-26,14.50
+Camarones a la Plancha,Plato principal,Baja,"camarones, limón, ajo, perejil, mantequilla",30,220,2024-01-27,18.99
+Ensalada Griega,Entrante,Baja,,20,200,2024-01-28,10.50
+Sopa de Tomate,Entrante,Baja,"tomate, cebolla, ajo, caldo de verduras, albahaca",35,120,2024-01-29,8.50
+Pollo al Curry,Plato principal,Media,"pollo, curry, cebolla, tomate, leche de coco",45,400,2024-01-30,15.75
+Galletas de Avena,Postre,Baja,"avena, harina, azúcar, huevo, mantequilla",25,160,2024-01-31,7.95
+Tortilla Española,Plato principal,Baja,"patatas, huevos, cebolla, aceite de oliva, sal",30,320,2024-02-01,11.25
+Puré de Papas,Acompañamiento,Baja,"papas, leche, mantequilla, sal, pimienta",20,180,2024-02-02,5.99
+Pastel de Zanahoria,Postre,Baja,"zanahorias, harina, azúcar, huevo, nueces",55,300,2024-02-03,13.50
+Pescado al Horno,Plato principal,Baja,"filete de pescado, limón, ajo, perejil, aceite de oliva",35,250,2024-02-04,16.25
+Ensalada Caprese,Entrante,Baja,"tomate, mozzarella, albahaca, aceite de oliva, sal",15,220,2024-02-05,9.75
+Arroz con Pollo,Plato principal,Baja,"arroz, pollo, cebolla, pimiento, azafrán",40,380,2024-02-06,14.99
+Helado de Vainilla,Postre,Baja,"leche, crema, azúcar, yemas de huevo, vainilla",30,200,2024-02-07,8.50
+Bruschetta,Entrante,Baja,"pan, tomate, ajo, albahaca, aceite de oliva",20,160,2024-02-08,7.25
+Cordero Asado,Plato principal,Media,"pierna de cordero, romero, ajo, vino tinto, sal",60,450,2024-02-09,22.50
+Gazpacho,Entrante,Baja,,25,120,2024-02-10,6.95
+Cheesecake,Postre,Baja,"galletas, queso crema, azúcar, huevo, vainilla",45,320,2024-02-11,17.50
+Ceviche de Pescado,Entrante,Baja,,20,180,2024-02-12,14.25
+Ratatouille,Plato principal,Baja,"berenjena, calabacín, tomate, cebolla, albahaca",40,220,2024-02-13,11.99
+Brownies,Postre,Baja,"chocolate, harina, azúcar, huevo, nueces",30,250,2024-02-14,9.50
+Sopa de Lentejas,Entrante,Baja,"lentejas, zanahoria, cebolla, caldo de verduras, apio",35,200,2024-02-15,8.75
+Burritos,Plato principal,Baja,"frijoles, arroz, carne de res, tortillas, queso",30,380,2024-02-16,13.99
+Ensalada Waldorf,Entrante,Baja,"manzana, apio, nueces, mayonesa, uvas",15,180,2024-02-17,10.25
+Tiramisú,Postre,Baja,"queso mascarpone, café, bizcochos, cacao, huevo",40,300,2024-02-18,15.50
+Pollo al Limón,Plato principal,Baja,"pollo, limón, ajo, romero, aceite de oliva",35,320,2024-02-19,12.75
+Muffins de Arándanos,Postre,Baja,"harina, arándanos, azúcar, huevo, leche",25,180,2024-02-20,7.95
+Caponata,Entrante,Baja,"berenjena, tomate, apio, aceitunas, alcaparras",30,160,2024-02-21,9.99
+Canelones,Plato principal,Media,"pasta para canelones, carne picada, tomate, queso, bechamel",50,420,2024-02-22,18.50
+Ensalada de Quinoa,Entrante,Baja,"quinoa, pepino, tomate, aguacate, aderezo de limón",25,280,2024-02-23,12.75
+Gazpacho Andaluz,Entrante,Baja,"tomate, pepino, pimiento, ajo, pan",20,160,2024-02-24,7.95
+Pollo al Curry,Plato principal,Media,"pollo, cebolla, tomate, leche de coco, curry",45,400,2024-02-25,15.75
+Helado de Fresa,Postre,Baja,"fresas, leche, azúcar, nata, vainilla",30,220,2024-02-26,10.99
+Sopa de Champiñones,Entrante,Baja,"champiñones, cebolla, ajo, caldo de pollo, perejil",30,180,2024-02-27,8.50
+Pechuga de Pavo al Horno,Plato principal,Baja,"pechuga de pavo, romero, ajo, aceite de oliva, limón",40,300,2024-02-28,13.25
+Mousse de Fresa,Postre,Baja,"fresas, nata, azúcar, gelatina, huevo",25,250,2024-02-29,11.50
+Arroz Primavera,Acompañamiento,Baja,"arroz, zanahoria, guisantes, maíz, aceite de oliva",25,200,2024-03-01,6.75
+Pudin de Pan,Postre,Baja,"pan, leche, azúcar, huevos, pasas",40,280,2024-03-02,9.99
+Huevos Rancheros,Plato principal,Baja,"huevos, tortillas, frijoles, salsa, aguacate",25,320,2024-03-03,11.75
+Ensalada de Mango y Aguacate,Entrante,Baja,"mango, aguacate, lechuga, cebolla, cilantro",20,180,2024-03-04,9.50
+Lentejas Estofadas,Plato principal,Baja,"lentejas, zanahoria, cebolla, tomate, ajo",35,250,2024-03-05,8.99
+Pastel de Limón,Postre,Baja,"limón, harina, azúcar, huevo, yogur",45,280,2024-03-06,12.25
+Tacos de Pescado,Plato principal,Baja,,30,300,2024-03-07,14.99
+Brócoli al Vapor,Acompañamiento,Baja,"brócoli, sal, aceite de oliva, papas, ajo",15,120,2024-03-08,5.75
+Cheesecake de Frutos Rojos,Postre,Baja,"galletas, queso crema, azúcar, huevo, frutos rojos",50,350,2024-03-09,17.25
+Pasta con Pesto,Plato principal,Baja,"pasta, albahaca, piñones, queso parmesano, ajo",20,320,2024-03-10,11.50
+Tarta de Queso y Chocolate,Postre,Baja,"galletas, queso crema, azúcar, huevo, chocolate",55,380,2024-03-11,16.50
+Champiñones Rellenos,Entrante,Baja,"champiñones, queso crema, ajo, espinacas, pan rallado",25,200,2024-03-12,9.95
+Risotto de Setas,Plato principal,Media,"arroz, setas, cebolla, caldo de verduras, vino blanco",40,350,2024-03-13,14.50
+Pollo a la Cazadora,Plato principal,Media,"pollo, champiñones, tomate, cebolla, vino tinto",45,400,2024-03-14,15.99
+Ensalada de Couscous,Entrante,Media,"couscous, pepino, tomate, menta, limón",25,280,2024-03-15,11.25
+Lasagna de Espinacas,Plato principal,Media,"pasta, espinacas, queso ricotta, tomate, mozzarella",60,420,2024-03-16,17.50
+Camarones con Salsa de Coco,Plato principal,Media,"camarones, leche de coco, cebolla, ajo, pimiento",35,380,2024-03-17,19.25
+Budín de Pan y Pasas,Postre,Media,"pan, leche, azúcar, huevo, pasas",50,300,2024-03-18,12.99
+Quiche Lorraine,Plato principal,Media,"masa de quiche, bacon, queso gruyere, cebolla, huevos",50,420,2024-03-19,16.75
+Tacos al Pastor,Plato principal,Media,"carne de cerdo, tortillas, piña, cebolla, cilantro",40,350,2024-03-20,14.50
+Tarta de Fresas con Crema,Postre,Media,"masa de tarta, fresas, crema pastelera, gelatina, azúcar",55,280,2024-03-21,18.99
+Pasta Carbonara,Plato principal,Media,"pasta, bacon, huevo, queso parmesano, pimienta",30,380,2024-03-22,13.75
+Canelones de Espinacas,Plato principal,Media,"pasta para canelones, espinacas, queso ricotta, tomate, mozzarella",50,400,2024-03-23,15.50
+Sopa de Pollo con Fideos,Entrante,Media,"pollo, fideos, zanahoria, apio, caldo de pollo",35,250,2024-03-24,9.75
+Arroz con Mariscos,Plato principal,Media,"arroz, mejillones, camarones, calamares, ajo",40,380,2024-03-25,17.99
+Tartaleta de Limón,Postre,Media,"masa de tarta, limón, leche condensada, huevos, azúcar",55,320,2024-03-26,14.25
+Pasta con Pesto de Espinacas,Plato principal,Media,"pasta, espinacas, piñones, queso parmesano, ajo",30,350,2024-03-27,12.50
+Estofado de Ternera,Plato principal,Media,"ternera, zanahoria, patatas, cebolla, caldo de carne",60,420,2024-03-28,18.50
+Ensalada de Pasta con Pesto,Entrante,Media,"pasta, pesto, tomate cherry, albahaca, queso parmesano",25,280,2024-03-29,11.75
+Raviolis de Ricotta y Espinacas,Plato principal,Media,"raviolis, ricotta, espinacas, tomate, albahaca",35,380,2024-03-30,16.99
+Tiramisú de Frutas,Postre,Media,"bizcochos, frutas variadas, queso mascarpone, café, cacao",40,300,2024-03-31,15.25
+Pescado en Papillote,Plato principal,Media,"filete de pescado, tomate, cebolla, aceitunas, vino blanco",30,320,2024-04-01,14.50
+Risotto de Trufa Negra,Plato principal,Alta,"arroz, trufa negra, caldo de champiñones, parmesano, vino blanco",45,400,2024-04-02,26.50
+Coq au Vin,Plato principal,Alta,"pollo, champiñones, vino tinto, cebolla, bacon",60,450,2024-04-03,32.99
+Soufflé de Queso,Entrante,Alta,"queso gruyere, mantequilla, harina, leche, huevos",40,300,2024-04-04,22.75
+Paella de Mariscos,Plato principal,Alta,,50,420,2024-04-05,38.50
+Cordero a la Menta,Plato principal,Alta,"pierna de cordero, menta, ajo, vino tinto, caldo de cordero",60,480,2024-04-06,44.25
+Millefeuille de Frutas,Postre,Alta,"masa hojaldrada, crema patisserie, fresas, kiwi, mango",65,320,2024-04-07,29.99
+Sushi de Salmón Flameado,Entrante,Alta,,55,380,2024-04-08,36.25
+Gnocchi con Salsa de Trufa,Plato principal,Alta,"gnocchi, crema, parmesano, trufa, mantequilla",50,350,2024-04-09,28.75
+Tarta de Chocolate y Avellanas,Postre,Alta,"chocolate negro, avellanas, harina, mantequilla, huevos",60,420,2024-04-10,33.50
+Terrina de Foie Gras,Entrante,Alta,"foie gras, brandy, huevo, nata, sal",55,320,2024-04-11,42.99
+Pato a la Naranja,Plato principal,Alta,"pato, naranjas, Grand Marnier, caldo de ave, azúcar",60,480,2024-04-12,36.75
+Caviar Blini,Entrante,Alta,"caviar, blinis, crema agria, huevo duro, cebolla",30,200,2024-04-13,79.99
+Filet Wellington,Plato principal,Alta,"solomillo de ternera, hojaldre, champiñones, foie gras, mostaza",70,450,2024-04-14,55.50
+Sorbet de Mandarina,Postre,Alta,"mandarinas, azúcar, clara de huevo, agua, licor de naranja",25,180,2024-04-15,18.25
+Raviolis de Langosta,Plato principal,Alta,,50,400,2024-04-16,42.75
