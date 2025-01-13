@@ -1,0 +1,6 @@
+sistema,observador,planetas,distancia_luz,notas
+SolarSystem,astronomer1,"Mercury#57.9#0;Venus#108.2#0;Earth#149.6#1;Mars#227.9#2",0.0,[Nearby system with habitable planet]
+AlphaCentauri,observerX,"AlphaB#1.1#0;AlphaC#1.5#0",4.37,[Binary star system]
+Kepler22,astroLab,"Kepler22b#600#1",620.9,[Exoplanet with potential water]
+TRAPPIST-1,spaceResearcher,"TRAPPIST1b#0.011#0;TRAPPIST1c#0.015#0;TRAPPIST1d#0.021#0;TRAPPIST1e#0.029#1",39.1,[Multiple rocky planets]
+VegaSystem,stargazer,"Vega1#25.3#0;Vega2#43.7#0",25.0,[Bright star system]
