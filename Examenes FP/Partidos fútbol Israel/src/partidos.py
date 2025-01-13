@@ -78,19 +78,34 @@ def partidos_por_mes(partidos: list[Partido]):
         
     return sorted(res.items(), key=lambda x:x[0])
 
-def partidos_mensuales_por_anyo(partidos: list[Partido]):
-    '''
-    usando la función del apartado anterior, implemente una función que recibe una 
-    lista de tuplas de tipo Partido, y devuelve un diccionario tal que a cada año  como clave le hace corresponder una 
-    lista ordenada por mes  de tuplas de tipo (mes, frecuencia) con el número de partidos por mes jugados por Israel 
-    en el año dado por la clave.
-    '''
-    res = defaultdict(list)
-    for x in partidos:
-        res[x.fecha.year].append(x)
+# def partidos_mensuales_por_anyo(partidos: list[Partido]):
+#     '''
+#     usando la función del apartado anterior, implemente una función que recibe una 
+#     lista de tuplas de tipo Partido, y devuelve un diccionario tal que a cada año  como clave le hace corresponder una 
+#     lista ordenada por mes  de tuplas de tipo (mes, frecuencia) con el número de partidos por mes jugados por Israel 
+#     en el año dado por la clave.
+#     '''
+#     res = defaultdict(list)
+#     for x in partidos:
+#         res[x.fecha.year].append(x)
         
-    for clave, valor in res.items():
-        res[clave] = partidos_por_mes(valor)
+#     for clave, valor in res.items():
+#         res[clave] = partidos_por_mes(valor)
         
-    return sorted(res.items(), key=lambda x:x[0])
+#     return sorted(res.items(), key=lambda x:x[0])
+
+def partidos_mensuales_por_anyo(partido: list[Partido]):
+    '''
+    Para ordenar un doble diccionario
+    '''
+    dicc = defaultdict(lambda: defaultdict(int))
+    for p in partido:
+        dicc[p.fecha.year][p.fecha.month] += 1
+    
+    res = []
+    for clave, dicc2 in sorted(dicc.items(), key=lambda x:x[0]):
+        sorted_months = sorted(dicc2.items(), key=lambda x: x[0])
+        res.append((clave, sorted_months))
+
+    return res
 

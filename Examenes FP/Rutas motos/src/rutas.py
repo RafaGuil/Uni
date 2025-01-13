@@ -28,7 +28,7 @@ def lee_rutas(csv_file):
 
 def acumular_kms_por_meses(rutas: list[Ruta]):
     '''
-     recibe una lista de tuplas de tipo Ruta, y devuelve un diccionario que asocia a 
+    Recibe una lista de tuplas de tipo Ruta, y devuelve un diccionario que asocia a 
     cada año una lista con el total de kilómetros que se han recorrido en cada mes. Si en alguno de los meses 
     no se ha realizado ninguna ruta, debe aparecer el valor 0.0. Los valores en la lista deben estar ordenados 
     cronológicamente,  es  decir,  el  primer  valor  se  corresponde  con  enero,  el  segundo  con  febrero,  y  así 
