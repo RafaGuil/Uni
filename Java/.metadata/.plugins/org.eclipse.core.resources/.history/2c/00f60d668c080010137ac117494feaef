@@ -1,0 +1,9 @@
+package fp.universidad.tipos;
+
+public class FactoriaUniversidad {
+	public static Espacio creaEspacio(String datos) {
+		return new Espacio(datos);
+	}
+	
+	
+}
