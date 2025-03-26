@@ -1,0 +1,31 @@
+div.title-block {
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: #333333;
+}
+
+#title {
+    font-size: 300%;
+    text-decoration: none;
+    color: #BBBBBB;
+    font-family: sans-serif;
+    margin-bottom: 0;
+}
+
+#subtitle {
+    font-size: 120%;
+    font-style: italic;
+    color: #BBBBBB;
+    font-family: monospace;
+}
+
+div.navigation>a {
+    color: white;
+    font-size: 120%;
+    background-color: #555555;
+    font-family: monospace;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 150px;
+}

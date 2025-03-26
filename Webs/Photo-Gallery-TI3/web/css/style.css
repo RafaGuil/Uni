@@ -1,0 +1,52 @@
+@import url("estilo2.css");
+
+div.photo-block {
+        text-align: center;
+        border: 1px solid gray;
+        border-radius: 5%;
+}
+
+div.photo-title {
+        font-size: 140%;
+        font-family: Arial;
+        text-decoration: underline;
+}
+
+div.photo-score {
+        font-family: 130%;
+        font-family: monospace;
+}
+
+
+
+body.dark {
+        background-color: #222222;
+        color: #eeeeee;
+}
+
+div.gallery-container {
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+}
+
+img.photo-image {
+        width: 100%;
+        height: auto;
+}
+
+input,
+select {
+        background-color: #666666;
+        border-color: #999999;
+        color: white;
+}
+
+.input-group label {
+        display: inline-block;
+        width: 200px;
+        text-align: right;
+}
+
+.input-group {
+        margin-bottom: 0.5em;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/utils/include.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body class="dark">
+    <div id="page-header"></div>
+    <h2>Login:</h2>
+    <form>
+        <div class="input-group">
+            <label for="Username">Username:
+                <input type="text" id="Username" name="Username" required>
+            </label>
+        </div>
+
+        <div class="input-group">
+            <label for="Password">Password:</label>
+            <input type="password" id="Password" name="Password" required>
+        </div>
+
+        <div class="input-group">
+            <input type="submit">
+        </div>
+    </form>
+    <script>
+        include("header.html", "#page-header");
+    </script>
+
+</body>
+
+</html>

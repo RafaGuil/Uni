@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/utils/include.js"></script>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script src="/js/libs/bootstrap.min.js"></script>
+
+    <script type="module" src="js/index.js"></script>
+
+    <title> IISSI-2</title>
+</head>
+
+<body class="dark">
+    <div class="container">
+        <div class="row">
+            <div id="page-header"></div>
+        </div>
+
+        <button class="btn btn-success" id="test-button">Press me!</button>
+
+        <div class="row">
+            <h2>Recent pictures</h2>
+            <a href="upload_picture.html">Upload a new picture</a>
+        </div>
+
+        <div id="gallery"></div>      
+
+    </div>
+
+    <script>
+        include("header.html", "#page-header");
+    </script>
+
+</body>
+
+</html>
