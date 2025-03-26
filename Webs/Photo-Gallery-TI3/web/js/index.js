@@ -41,13 +41,29 @@ function main() {
     ];
     let gallery = galleryRenderer.asCardGallery(photos);
     container.appendChild(gallery);
+
+    let cards = document.getElementsByClassName("card");
+    for (let card of cards) {
+        console.log("aaaaaaaaaaaaa")
+        card.onmouseenter = handleMouseEnter;
+        card.onmouseleave = handleMouseLeave;
+    }
 }
 
 function clickHandler(event) {
-    let target = event.target;
-    let text = target.textContent;
-    alert(text);
-    }
+    let myT = event.target;
+    alert(myT.textContent);
+}
+
+function handleMouseEnter(event) {
+    let card = event.target;
+    card.style.border = "6px solid blue"
+}
+
+function handleMouseLeave(event) {
+    let card = event.target;
+    card.style.border = "none";
+}
 
 document.addEventListener("DOMContentLoaded", main);
 
