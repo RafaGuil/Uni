@@ -1,69 +1,37 @@
 "use strict"
 
 import { galleryRenderer } from "/js/renderers/gallery.js";
+import { accordionRenderer } from "/js/renderers/accordion.js";
+import { messageRenderer } from "/js/renderers/messages.js";
+import { photoswithusersAPI_auto } from "/js/api/_photoswithusers.js";
 
-function main() {
+async function main() {
+    loadPhotos();
+}
 
-    let button = document.getElementById("test-button");
-    button.onclick = clickHandler;
+async function loadPhotos() {
+
+    let galleryContainer = document.getElementById("gallery");
+
+    try {
+        let photos = await photoswithusersAPI_auto.getAll();
+        console.log(photos);
+
+        let galleryRen = galleryRenderer.asCardGallery(photos);
+        console.log(galleryRen);
+        galleryContainer.appendChild(galleryRen);
+
+        let accordionRen = accordionRenderer.asCardAccordion(photos);
+        console.log(accordionRen);
+        galleryContainer.appendChild(accordionRen);
 
 
-    let container = document.getElementById("gallery");
-    let photos = [
-        {
-            title: "Samoyed",
-            description: "A very good boy.",
-            userId: 1,
-            url: "https://i.ibb.co/tY1Jcnc/wlZCfCv.jpg",
-            date: "15/08/2020",
-        },
-        {
-            title: "ETSII",
-            description: "E.T.S. Ing. Informatica, Universidad de Sevilla",
-            userId: 2,
-            url: "images/gato.webp",
-            date: "01/01/2021",
-        },
-        {
-            title: "Seville",
-            description: "The beautiful city of Seville",
-            userId: 3,
-            url: "images/gato.webp",
-            date: "03/02/2019",
-        },
-        {
-            title: "Abstract art",
-            description: "Clipart",
-            userId: 4,
-            url: "images/example.jpg",
-            date: "14/08/2019",
-        },
-    ];
-    let gallery = galleryRenderer.asCardGallery(photos);
-    container.appendChild(gallery);
+        document.dispatchEvent(new CustomEvent("galleryRendered"));
 
-    let cards = document.getElementsByClassName("card");
-    for (let card of cards) {
-        console.log("aaaaaaaaaaaaa")
-        card.onmouseenter = handleMouseEnter;
-        card.onmouseleave = handleMouseLeave;
+    } catch (error) {
+        messageRenderer.showErrorMessage("Error al cargar la galería", error);
     }
-}
 
-function clickHandler(event) {
-    let myT = event.target;
-    alert(myT.textContent);
-}
-
-function handleMouseEnter(event) {
-    let card = event.target;
-    card.style.border = "6px solid blue"
-}
-
-function handleMouseLeave(event) {
-    let card = event.target;
-    card.style.border = "none";
 }
 
 document.addEventListener("DOMContentLoaded", main);
-

@@ -1,0 +1,138 @@
+package fp.universidad.tipos;
+
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+import fp.utiles.Checkers;
+
+public class Grado implements Comparable<Grado>{
+
+	private String nombre;
+	private Set<Asignatura>asignaturasObligatorias;
+	private Set<Asignatura>asignaturasOptativas;
+	private double minimoNumeroCreditosOptativos;
+	
+	//Problemas: 1.proyección (créditos) 2. reducción/acumulación
+	private boolean testMismoNumeroCreditosOptativas(Set<Asignatura>asignaturasOptativas) {
+			boolean r=true;
+			//1.
+			Set<Double>creditos=new HashSet<>();
+			for(Asignatura asignatura:asignaturasOptativas)
+				creditos.add(asignatura.creditos());
+			//2.
+			r=(creditos.size()<=1);
+			
+			return r;
+	}
+	
+	private static double totalCreditosOptativas(Set<Asignatura>asignaturasOptativas) {
+		double r=0;
+		for(Asignatura asignatura:asignaturasOptativas)
+			r+=asignatura.creditos();
+		return r;
+	}
+	 
+	public Grado(String nombre,
+			Set<Asignatura>asignaturasObligatorias,
+			Set<Asignatura>asignaturasOptativas,
+			double minimoNumeroCreditosOptativos) {
+		Checkers.check("Todas las asignaturas optativas deben tener mismo número de créditos.",
+				testMismoNumeroCreditosOptativas(asignaturasOptativas));
+		Checkers.check("Mínimo número de créditos optativos incorrecto.",
+				0<=minimoNumeroCreditosOptativos && 
+				minimoNumeroCreditosOptativos<=Grado.totalCreditosOptativas(asignaturasOptativas));
+		this.nombre=nombre;
+		this.asignaturasObligatorias=new HashSet<>();
+		this.asignaturasObligatorias.addAll(asignaturasObligatorias);
+		this.asignaturasOptativas=new HashSet<>();
+		this.asignaturasOptativas.addAll(asignaturasOptativas);
+		this.minimoNumeroCreditosOptativos=minimoNumeroCreditosOptativos;
+	}
+	
+	public double numeroTotalCreditos() {
+		double r=0;
+		for(Asignatura asignatura:this.asignaturasObligatorias)
+			r=r+asignatura.creditos();
+		r+=this.minimoNumeroCreditosOptativos;
+		return r;
+	}
+
+	@Override
+	public String toString() {
+		return nombre;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nombre);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Grado other = (Grado) obj;
+		return Objects.equals(nombre, other.nombre);
+	}
+
+	@Override
+	public int compareTo(Grado o) {
+		// TODO Auto-generated method stub
+		return this.nombre.compareTo(o.nombre);
+	}
+	
+	//////////
+	/*
+	 * `getAsignaturas`, que dado un curso, devuelve 
+	 * un conjunto con todas las asignaturas del grado, 
+	 * tanto obligatorias como optativas, que se imparten 
+	 * en el curso dado.
+	 * Problemas: 1.filtro/selección
+	 */
+	public Set<Asignatura>getAsignaturas(int curso){
+		Set<Asignatura>r=new HashSet();
+		//1.
+		for(Asignatura asignatura:this.asignaturasObligatorias)
+			if (asignatura.curso()==curso)
+				r.add(asignatura);
+		for(Asignatura asignatura:this.asignaturasOptativas)
+			if (asignatura.curso()==curso)
+				r.add(asignatura);
+		
+		return r;
+	}
+	
+	public SortedMap<Asignatura, Double> getCreditosPorAsignatura(){
+		SortedMap<Asignatura, Double> res = new TreeMap<Asignatura, Double>();
+		List asignatura = new List();
+//		for ()
+	}
+	
+	/*
+	 * `getAsignatura`, que dado un código, devuelve la asignatura 
+	 * del grado cuyo código es el dado como parámetro, o `null` 
+	 * si no existe ninguna asignatura con dicho código.
+	 * Problemas: 1.filtro/selección
+	 */
+	public Asignatura getAsignaturas(String codigo){
+		Asignatura r=null;
+		//1.
+		for(Asignatura asignatura:this.asignaturasObligatorias)
+			if (asignatura.codigo().equals(codigo))
+				return asignatura;
+		for(Asignatura asignatura:this.asignaturasOptativas)
+			if (asignatura.codigo().equals(codigo))
+				return asignatura;
+		
+		return r;
+	}
+}

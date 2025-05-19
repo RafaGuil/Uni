@@ -12,34 +12,34 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <script src="/js/libs/bootstrap.min.js"></script>
 
+    <script src="js/libs/axios.min.js"></script>
+
+    <script type="module" src="js/photo-detail.js"></script>
+    <script type="module" src="js/header.js"></script>
+
+
     <title> IISSI-2</title>
 </head>
 
 <body class="dark">
-    <div class="row">
-        <div id="page-header"></div>
-    </div>
-
     <div class="container">
+        <div class="row">
+            <div id="page-header"></div>
+        </div>
         <div class="row">
             <h2>Recent pictures</h2>
             <a href="upload_picture.html">Upload a new picture</a>
         </div>
 
+        <div id="errors"></div>
         <div class="row text-center">
-            <div class="col col-md-9">
-                <div class="col-md">
-                    <h3>Samoyed</h3>
-                    <h6>A very good boy</h6>
-                    <p>Uploaded by <a href="user_profile.html">User 1</a> on 12/01/2021</p>
-                    <hr>
-                    <img src="https://i.ibb.co/tY1Jcnc/wlZCfCv.jpg" class="img-fluid">
-                </div>
+            <div class="col col-md-9" id="detalle" >
+               
             </div>
 
-            <div class="col col-md-3">
-                <button class="btn btn-success"> Editar</button>
-                <button class="btn btn-danger"> Borrar</button>
+            <div class="col col-md-3" id="actions-col">
+                <button id="button-edit" class="btn btn-success"> Editar</button>
+                <button id="button-Dlt" class="btn btn-danger"> Borrar</button>
                 <form>
                     <div class="form-group">
                         <label for="rating-input">Rate this photo:</label>

@@ -32,7 +32,7 @@
             "visibility",
             "userId"
         ],
-        "auth_required": true,
+        "auth_required": false,
         "allowed_roles": [
             "*"
         ]
@@ -50,7 +50,7 @@
             "visibility",
             "userId"
         ],
-        "auth_required": true,
+        "auth_required": false,
         "allowed_roles": [
             "*"
         ]
@@ -60,7 +60,7 @@
         "route": "/photos/$photoId",
         "method": "DELETE",
         "sql": "DELETE FROM photos WHERE photoId = $photoId",
-        "auth_required": true,
+        "auth_required": false,
         "allowed_roles": [
             "*"
         ]

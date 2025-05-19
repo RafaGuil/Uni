@@ -58,7 +58,7 @@ CREATE TABLE Comments (
 	userId INT NOT NULL,
 	photoId INT NOT NULL,
 	FOREIGN KEY (userId) REFERENCES Users (userId),
-	FOREIGN KEY (photoId) REFERENCES Photos (photoId)
+	FOREIGN KEY (photoId) REFERENCES Photos (photoId) 
 );
 
 CREATE TABLE Votes (
