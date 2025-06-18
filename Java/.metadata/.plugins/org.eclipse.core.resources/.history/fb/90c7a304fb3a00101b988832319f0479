@@ -1,0 +1,18 @@
+package fp.carrera.tipos.test;
+
+import fp.carrera.tipos.Carreras;
+import fp.carrera.tipos.FactoriaCarreras;
+
+public class TestCarrera {
+	public static void main(String[] args) {
+		Carreras lineas = FactoriaCarreras.leeCarreras("data/csv1.csv", "data/csv2.csv");
+		
+		testFactoriaCarreras(lineas);
+	}
+	
+	private static void testFactoriaCarreras(Carreras lineas) {
+		System.out.println("Factoria Carreras: Se han leido" + lineas.getNCarreras() + "carreras, las cuales son:");
+		
+		System.out.println(lineas);
+	}
+}

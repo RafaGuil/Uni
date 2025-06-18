@@ -1,0 +1,5 @@
+package fp.carrera.tipos;
+
+public enum Sexo {
+
+}

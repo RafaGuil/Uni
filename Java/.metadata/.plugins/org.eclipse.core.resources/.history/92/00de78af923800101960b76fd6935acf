@@ -1,0 +1,68 @@
+package fp.votaciones.tipos;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import fp.utiles.Checkers;
+
+public class FactoriaEncuestas {
+	
+	public static List<Encuesta> leeEncuesta(String fileName) {
+	    List<Encuesta> res = null;
+		
+		try {
+			res = Files.lines(Paths.get(fileName))
+					.skip(1)
+					.map(FactoriaEncuestas::parsearEncuesta)
+					.collect(Collectors.toList());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	private static Encuesta parsearEncuesta (String lineaCSV) {
+		Checkers.checkNoNull(lineaCSV);
+		String [] trozos = lineaCSV.split(",");
+		Checkers.check("FactoriaEncuestas::Formato no válido", trozos.length == 8);
+		String consultora = trozos[0].strip();
+		LocalDate fechaInicio = LocalDate.parse(trozos[1].strip());
+		LocalDate fechaFin = LocalDate.parse(trozos[2].strip());
+		Integer numEncuestados = Integer.valueOf(trozos[3].strip());
+		String pais = trozos[4].strip();
+		TipoEncuesta tipo = parseaTipoEncuesta(trozos[5].strip());
+		Double porcentajeIndecisos = Double.valueOf(trozos[6].strip());
+		List<Resultado> resultados = parseaResultados(trozos[7].strip());
+		return new Encuesta(consultora, fechaInicio, fechaFin, numEncuestados,
+		pais, tipo, porcentajeIndecisos, resultados);
+	}
+	
+	private static List<Resultado> parseaResultados(String cad) {
+		String clean = cad.replace ("'", "")
+							.replace("(", "")
+							.replace(")", "");
+		String [] trozos = clean.split(";");
+		List<Resultado> res = new ArrayList<>();
+		for (String trozo:trozos) {
+			res.add(parseaResultado(trozo.strip()));
+		}
+		return res;
+	}
+	
+	private static Resultado parseaResultado(String trozo) {
+		String [] trozos = trozo.split(":");
+		Checkers.check("Formato resultado no válido", trozos.length == 2);
+		Double porcentaje = Double.valueOf(trozos[1].strip());
+		return new Resultado(trozos[0].strip(), porcentaje);
+	}
+	
+	private static TipoEncuesta parseaTipoEncuesta(String cad) {
+		return TipoEncuesta.valueOf(cad.toUpperCase());
+	}
+}

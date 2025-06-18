@@ -1,0 +1,76 @@
+package fp.buses.tipos;
+
+import java.time.Duration;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class AgenciaBus {
+	private String nombre;
+	private List<Viaje> viajes;
+	
+	public AgenciaBus(String nombre, Stream<Viaje> viaje) {
+		this.nombre = nombre;
+		this.viajes = viaje.collect(Collectors.toList());
+	}
+
+	@Override
+	public String toString() {
+		return "AgenciaBus [nombre=" + nombre + ", viajes=" + viajes + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nombre, viajes);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AgenciaBus other = (AgenciaBus) obj;
+		return Objects.equals(nombre, other.nombre) && Objects.equals(viajes, other.viajes);
+	}
+	
+	public Duration getMaximaDuracion() {
+		return viajes.stream()
+				.max(Comparator.comparing(Viaje::getNParadas))
+				.map(Viaje::getDuracion)
+				.orElse(null);
+	}
+	
+	public void añadirTiempoDescanso(String parada, Integer minutos) {
+		viajes.stream()
+				.filter(v->v.getTrayecto().stream()
+						.anyMatch(a->a.Nombre().equals(parada)))
+				.forEach(v->v.setDuracion(v.getDuracion().plusMinutes(minutos)));
+	}
+	
+	public SortedMap<String, Duration> getDuracionMinimaPorDestino(TipoViaje tipo) {
+		return viajes.stream()
+				.filter(v->v.getTipo().equals(tipo))
+				.collect(Collectors.groupingBy(Viaje::getDestino,
+						TreeMap::new, Collectors.collectingAndThen(Collectors.minBy(
+								Comparator.comparing(Viaje::getDuracion)), v->v.get().getDuracion())));
+	}
+	
+	public Map<String, Set<Viaje>> getViajesPorParadasStream(Double precio) {
+		return viajes.stream()
+				.filter(v->v.getPrecio() > precio)
+				.flatMap(v->v.getTrayecto().stream()
+						.map(p->Map.entry(p.Nombre(), v)))
+				.collect(Collectors.groupingBy(Map.Entry::getKey, TreeMap::new,
+						Collectors.mapping(Map.Entry::getValue, Collectors.toSet())));
+	}
+	
+}

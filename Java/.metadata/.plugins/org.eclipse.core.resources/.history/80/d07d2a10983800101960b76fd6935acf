@@ -1,0 +1,69 @@
+package fp.votaciones.tipos;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import fp.utiles.Checkers;
+
+public class FactoriaEncuestas {
+	public static List<Encuesta> leeEncuesta (String fileName) {	
+		List<Encuesta> res = null; //Si no se pone esto se ralla el return
+		
+		try {
+			res = Files.lines(Paths.get(fileName))
+					.skip(1)
+					.map(FactoriaEncuestas::parsearEncuesta)
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	private static Encuesta parsearEncuesta(String linea) {
+		Checkers.checkNoNull(linea);
+		
+		String[] trozos = linea.split(",");
+		Checkers.check("Formato inválido: La longitud de la linea tiene que ser 8", 
+				trozos.length == 8);
+		String consultora = trozos[0].strip();
+		LocalDate fechaInicio = LocalDate.parse(trozos[1].strip());
+		LocalDate fechaFin = LocalDate.parse(trozos[2].strip());
+		Integer nEncuestados = Integer.valueOf(trozos[3].strip());
+		String pais = trozos[4].strip();
+		TipoEncuesta tipo = parseaTipoEncuesta(trozos[5].strip());
+		Double porcentajeIndecisos = Double.valueOf(trozos[6].strip());
+		List<Resultado> resultados = parseaResultados(trozos[7].strip());
+	}
+	
+	private static List<Resultado> parseaResultados(String resultados) {
+		String limpia = resultados.replace("'", "")
+									.replace("(", "")
+									.replace(")", "");
+		
+		List<Resultado> res = new ArrayList<Resultado>();
+		String[] trozos = limpia.split(";");
+		for(String trozo:trozos) {
+			res.add(parseaResultado(trozo.strip()));
+		}
+		return res;
+	}
+	
+	private static Resultado parseaResultado(String trozo) {
+		Resultado res = null;
+		String[] t = trozo.split(":");
+		String partido = t[0].strip();
+		Double resultado = Double.valueOf(t[1].strip());
+		res = new Resultado(partido, resultado);
+		
+		return res;
+	}
+	
+	private static TipoEncuesta parseaTipoEncuesta(String tipo) {
+		return TipoEncuesta.valueOf(tipo.toUpperCase());
+	}
+}

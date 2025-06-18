@@ -1,0 +1,159 @@
+package fp.buses.tipos;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import fp.utiles.Checkers;
+
+public class Viaje {
+	private Double precio;
+	private Integer distancia;
+	private Duration duracion;
+	private TipoViaje tipo;
+	private List<Parada> trayecto;
+	
+	public Viaje(Double precio, Integer distancia, Duration duracion, 
+			TipoViaje tipo, List<Parada> trayecto) {
+		setPrecio(precio);
+		setDistancia(distancia);
+		setDuracion(duracion);
+		setTipo(tipo);
+		setTrayecto(trayecto);
+	}
+	
+	public Viaje(Double precio, Integer distancia, Duration duracion, 
+			TipoViaje tipo, Parada Origen, Parada Destino) {
+		setPrecio(precio);
+		setDistancia(distancia);
+		setDuracion(duracion);
+		setTipo(tipo);
+		List<Parada> trayecto = new ArrayList<Parada>();
+		trayecto.add(Origen);
+		trayecto.add(Destino);
+		setTrayecto(trayecto);
+	}
+
+	public Double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Double precio) {
+		Checkers.check("La precio debe ser mayor que cero.", 
+				precio > 0);
+		this.precio = precio;
+	}
+
+	public Integer getDistancia() {
+		return distancia;
+	}
+
+	public void setDistancia(Integer distancia) {
+		Checkers.check("La distancia debe ser mayor que cero.", 
+				distancia > 0);
+		this.distancia = distancia;
+	}
+
+	public Duration getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(Duration duracion) {
+		Checkers.check("La duración debe ser mayor que cero.", 
+				!duracion.isZero());
+		this.duracion = duracion;
+	}
+
+	public TipoViaje getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoViaje tipo) {
+		if (trayecto.size() == 2 && !trayecto.equals(null)) {
+			Checkers.check("El tipo de viaje de un viaje con solo un origen y un destino no puede ser TRANSBORDO.", 
+				!tipo.equals(TipoViaje.valueOf("TRANSBORDO")));
+		}
+		this.tipo = tipo;
+	}
+
+	public List<Parada> getTrayecto() {
+		return trayecto;
+	}
+
+	public void setTrayecto(List<Parada> trayecto) {
+		Checkers.check("El trayecto debe tener al menos dos paradas (origen y destino).", 
+				trayecto.size() >= 2);
+		this.trayecto = trayecto;
+	}
+	
+	public Double getVelocidadMedia() {
+		return distancia*1.0 / duracion.toHours();
+	}
+		
+	public Integer getNParadas() {
+		return (int) trayecto.stream()
+				.skip(1)
+				.limit(trayecto.size()-2)
+				.map(Parada::Nombre)
+				.distinct()
+				.count();
+	}
+	
+	public List<String> getIntermedias() {
+		return trayecto.stream()
+				.skip(1)
+				.limit(trayecto.size()-2)
+				.map(Parada::Nombre)
+				.collect(Collectors.toList());
+	}
+	
+	public String getOrigen() {
+		return trayecto.get(0).Nombre();
+	}
+	
+	public String getDestino() {
+		return trayecto.get(-1).Nombre();
+	}
+	
+	public Integer getNTransbordos() {
+	    int transbordos = 0;
+	    for (int i = 1; i < trayecto.size(); i++) {
+	        String actual = trayecto.get(i).Nombre();
+	        String anterior = trayecto.get(i - 1).Nombre();
+	        if (actual.equals(anterior)) {
+	            transbordos++;
+	        }
+	    }
+	    return transbordos;
+	}
+
+	@Override
+	public String toString() {
+		return "Viaje [precio=" + precio + ", distancia=" + distancia + ", duracion=" + duracion + ", tipo=" + tipo
+				+ ", trayecto=" + trayecto + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(trayecto);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Viaje other = (Viaje) obj;
+		return Objects.equals(trayecto, other.trayecto);
+	}
+
+	
+	
+}

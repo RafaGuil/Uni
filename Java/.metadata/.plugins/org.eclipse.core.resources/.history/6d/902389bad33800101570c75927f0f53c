@@ -1,0 +1,9 @@
+package fp.examenes.tipos;
+
+import java.util.List;
+
+public class FactoriaExamenes {
+	public static List<Examen> leeExamenes{
+		
+	}
+}

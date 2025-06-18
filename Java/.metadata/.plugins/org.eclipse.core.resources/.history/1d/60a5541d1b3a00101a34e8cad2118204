@@ -1,0 +1,74 @@
+package fp.buses.tipos.test;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+
+import fp.buses.tipos.AgenciaBus;
+import fp.buses.tipos.FactoriaViajes;
+import fp.buses.tipos.TipoViaje;
+import fp.buses.tipos.Viaje;
+
+public class TestBuses {
+	public static void main(String[] args) {
+		List<Viaje> lineas = FactoriaViajes.leeViaje("data/viajes.csv");
+		// testFactoriaViajes(lineas);
+		//testGetMaximaDuracion(lineas);
+		//testAñadirTiempoDescanso(lineas);
+		testGetDuracionMinimaPorDestino(lineas);
+	}
+	
+	private static void testFactoriaViajes(List<Viaje> lineas) {
+		System.out.println("Test Factoria Viajes");
+		
+		try {
+			for (int i = 0; i < lineas.size(); i++) {
+				System.out.println("Viaje " + i + lineas.get(i));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void testGetMaximaDuracion(List<Viaje> lineas) {
+		AgenciaBus agen = new AgenciaBus("FP", lineas.stream());
+		
+		System.out.println("Test 4.a ==============================================================================");
+		
+		Duration res = agen.getMaximaDuracion();
+		System.out.println("La duración máxima es " + res);
+	}
+	
+	private static void testAñadirTiempoDescanso(List<Viaje> lineas) {
+		AgenciaBus agen = new AgenciaBus("FP", lineas.stream());
+		
+		System.out.println("Test 4.b ==============================================================================");
+
+		String p1 = "Bilbao"; 
+		Integer min = 30;
+		agen.añadirTiempoDescanso(p1, min);
+		System.out.println("Se ha actualizado todo correctamente");
+	}
+	
+	private static void testGetDuracionMinimaPorDestino(List<Viaje> lineas) {
+		AgenciaBus agen = new AgenciaBus("FP", lineas.stream());
+		
+		System.out.println("Test 4.c ==============================================================================");
+		
+		TipoViaje t1 = TipoViaje.TRANSBORDO;
+		SortedMap<String, Duration> res = agen.getDuracionMinimaPorDestino(t1);
+		System.out.println("La duración minima por cada destino para viajes de tipo " + t1 + " es :" + res);
+	}
+	
+	private static void testGetViajesPorParadas(List<Viaje> lineas) {
+		AgenciaBus agen = new AgenciaBus("FP", lineas.stream());
+		
+		System.out.println("Test 4.d ==============================================================================");
+		
+		Double p1 = 20.0;
+		Map<String, Set<Viaje>> res = agen.getViajesPorParadas(p1);
+		System.out.println("Con viajes con precio inferior a " + p1 + " son :" + res);
+	}
+}

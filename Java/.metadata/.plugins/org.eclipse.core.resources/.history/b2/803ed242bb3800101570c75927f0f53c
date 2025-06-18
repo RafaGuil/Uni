@@ -1,0 +1,63 @@
+package fp.votaciones.tipos.test;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import fp.votaciones.tipos.Encuesta;
+import fp.votaciones.tipos.EstadisticasEncuestas;
+import fp.votaciones.tipos.FactoriaEncuestas;
+import fp.votaciones.tipos.TipoEncuesta;
+
+public class TestEncuesta {
+	public static void main(String[] args) {
+		List<Encuesta> lineas = FactoriaEncuestas.leeEncuesta("data/encuestas_electorales.csv");
+		//testFactoriaEncuesta(lineas);
+		testGetMediaNumEncuestadosConsultorayFecha(lineas);
+		testGetEncuestaMasEncuestadosPorDia(lineas);
+	}
+	
+	private static void testFactoriaEncuesta(List<Encuesta> lineas) {
+		System.out.println("Test Factoria Encuestas");
+		
+		try {
+			for (int i=1; i<lineas.size(); i++) {
+				System.out.println("Encuesta "+ i +lineas.get(i));
+			}
+		} catch (Exception e) {
+			System.out.println("Excepción inesperada capturada:\n   " + e);	
+		}
+	}
+	
+	private static void testGetMediaNumEncuestadosConsultorayFecha(List<Encuesta> lineas) {
+		EstadisticasEncuestas est = new EstadisticasEncuestas(lineas.stream());
+		
+		System.out.println("EJ1 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
+		
+		String c1 = "Consultora A";
+		LocalDate d1 = LocalDate.of(2024, 05, 29);
+		Double res = est.getMediaNumEncuestadosConsultorayFecha(c1, d1);
+		System.out.println("La media de la consultora " + c1 + " con fecha de fin anterior a "
+				+ d1 + " es " + res);
+		
+		String c2 = "Consultora B";
+		LocalDate d2 = LocalDate.of(2024, 05, 26);
+		Double res2 = est.getMediaNumEncuestadosConsultorayFecha(c2, d2);
+		System.out.println("La media de la consultora " + c2 + " con fecha de fin anterior a "
+				+ d2 + " es " + res2);
+	}
+	
+	private static void testGetEncuestaMasEncuestadosPorDia(List<Encuesta> lineas) {
+		EstadisticasEncuestas est = new EstadisticasEncuestas(lineas.stream());
+		
+		System.out.println("EJ1 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
+		
+		TipoEncuesta t1 = TipoEncuesta.TELEFONICA;
+		Encuesta res = est.getEncuestaMasEncuestadosPorDia(t1);
+		System.out.println("La encuesta de tipo " + t1 + " es: " + res);
+		
+		TipoEncuesta t2 = TipoEncuesta.PRESENCIAL;
+		Encuesta res2 = est.getEncuestaMasEncuestadosPorDia(t2);
+		System.out.println("La encuesta de tipo " + t2 + " es: " + res2);
+	}
+	
+}

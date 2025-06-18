@@ -1,0 +1,22 @@
+package fp.burguer.tipos.test;
+
+import java.util.List;
+
+import fp.burguer.tipos.FactoriaVisitas;
+import fp.burguer.tipos.Visita;
+
+public class TestCompeticion {
+	public static void main (String[] args) {
+		List<Visita> lineas = FactoriaVisitas.leeVisitas("data/evaluaciones.csv");
+		
+		testFactoriaVisitas(lineas);
+		
+	}
+	
+	private static void testFactoriaVisitas(List<Visita> lineas) {
+		System.out.println("FACTORÍA = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ");
+		
+		System.out.println("Leidas " + lineas.size() + " visitas.");
+		System.out.println("Primera visita: " + lineas.get(1));
+	}
+}

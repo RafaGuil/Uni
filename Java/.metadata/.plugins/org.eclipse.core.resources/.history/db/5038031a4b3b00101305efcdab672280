@@ -1,0 +1,70 @@
+package fp.carrera.tipos;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Carreras {
+	private SortedSet<Carrera> carreras;
+	
+	private static final Comparator<Carrera> CMP_C = Comparator.comparing(Carrera::getFechaHora).thenComparing(Comparator.naturalOrder());
+	
+	public Carreras(Stream<Carrera> carreras) {
+		this.carreras = carreras.collect(Collectors.toCollection(() -> new TreeSet<Carrera>(CMP_C)));
+	}
+	
+	public SortedSet<Carrera> getCarreras() {
+		SortedSet<Carrera> ss = new TreeSet<Carrera>(CMP_C);
+		ss.addAll(carreras);
+		return ss;
+	}
+	
+	public Integer getNCarreras() {
+		return carreras.size();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(carreras);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Carreras other = (Carreras) obj;
+		return Objects.equals(carreras, other.carreras);
+	}
+
+	@Override
+	public String toString() {
+		return "Carreras [carreras=" + carreras + "]";
+	}
+	
+	public List<Participante> participantesUltimaCarrera() {
+		return carreras.getLast().getParticipantes();
+	}
+	
+	public Carrera carreraMayorDesnivelParticipante(String nombre, String apellidos) {
+		return carreras.stream()
+				.filter(c->c.getParticipantes().stream().anyMatch(p->p.Nombre().equals(nombre) && p.Apellidos().equals(apellidos)))
+				.max(Comparator.comparing(Carrera::getDesnivel))
+				.get();
+	}
+	
+	public Double tiempoMedioCarrera(String IDcarrera) {
+		return carreras.stream()
+				.filter(c->c.getId().equals(IDcarrera))
+				.findFirst()
+				.get().tiempoMedioPorKm();
+	}
+}

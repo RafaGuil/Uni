@@ -1,0 +1,25 @@
+package fp.votaciones.tipos.test;
+
+import java.util.List;
+
+import fp.votaciones.tipos.Encuesta;
+import fp.votaciones.tipos.FactoriaEncuestas;
+
+public class TestEncuesta {
+	public static void main(String[] args) {
+		testFactoriaEncuesta("data/encuestas_electorales.csv");
+	}
+	
+	private static void testFactoriaEncuesta(String fichero) {
+		System.out.println("Test Factoria Encuestas");
+		
+		try {
+			List<Encuesta> enc = FactoriaEncuestas.leeEncuesta(fichero);
+			for (int i=1; i<enc.size(); i++) {
+				System.out.println("Encuesta"+ i +enc.get(i));
+			}
+		} catch (Exception e) {
+			System.out.println("Excepción inesperada capturada:\n   " + e);	
+		}
+	}
+}

@@ -1,0 +1,60 @@
+package fp.examenes.tipos.test;
+
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import fp.examenes.tipos.CalendarioExamenes;
+import fp.examenes.tipos.Examen;
+import fp.examenes.tipos.FactoriaExamenes;
+
+public class testExamenes {
+	public static void main(String[] args) {
+		List<Examen> lineas = FactoriaExamenes.leeExamenes("data/examenes.csv");
+		//testFactoriaExamenes(lineas);
+		//testGetExamenesPorAula(lineas);
+		testGetExamenMayorPorcentajeAsistentes(lineas);
+	}
+	
+	private static void testFactoriaExamenes(List<Examen> lineas) {
+		System.out.println("Test Factoria Examenes");
+		
+		try {
+			for (int i = 0; i < lineas.size(); i++) {
+				System.out.println("Examen " + i + lineas.get(i));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void testGetExamenesPorAula(List<Examen> lineas) {
+		CalendarioExamenes cal = new CalendarioExamenes(lineas.stream());
+
+		System.out.println("EJERCICIO 4.1===================================================================");
+		Map<String, Set<Examen>> res = cal.getExamenesPorAula();
+
+		for (Map.Entry<String, Set<Examen>> entry : res.entrySet()) {
+			String aula = entry.getKey();
+			Set<Examen> examenes = entry.getValue();
+
+			System.out.println("Aula: " + aula);
+			for (Examen e : examenes) {
+				System.out.println("  → " + e);  // Usa toString() de Examen
+			}
+		}
+	}
+	
+	public static void testGetExamenMayorPorcentajeAsistentes(List<Examen> lineas) {
+		CalendarioExamenes cal = new CalendarioExamenes(lineas.stream());
+
+		System.out.println("EJERCICIO 4.2===================================================================");
+		
+		LocalTime t = LocalTime.of(8, 30);
+		String nombreAula = "F1.30";
+		Examen res = cal.getExamenMayorPorcentajeAsistentes(t, nombreAula);
+		System.out.println("Examen con mayor porcentaje de asistentes realizado en el aula " + a1 + " y con hora de comienzo posterior a las " + t1 + ": " + res);
+	}
+
+}

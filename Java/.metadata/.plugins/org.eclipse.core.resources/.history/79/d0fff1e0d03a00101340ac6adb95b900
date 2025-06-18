@@ -1,0 +1,77 @@
+package fp.burguer.tipos;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import fp.utiles.Checkers;
+
+public class FactoriaVisitas {
+	public static List<Visita> leeVisitas(String fileName) {
+		List<Visita> res = new ArrayList<Visita>();
+		
+		try {
+			res = Files.lines(Paths.get(fileName))
+					.skip(1)
+					.map(FactoriaVisitas::parseaVisitas)
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	private static Visita parseaVisitas(String linea) {
+		Checkers.checkNoNull(linea);
+		
+		String[] trozos = linea.split(";");
+		String email = trozos[0].strip();
+		String ciudad = trozos[1].strip();
+		String CP = trozos[2].strip();
+		LocalDateTime FechaHoraEntrada = parseaFechaHora(trozos[3].strip());
+		Double temperatura = Double.valueOf(trozos[4].strip());
+		LocalDateTime FechaHoraSalida = parseaFechaHora(trozos[5].strip());
+		List<Evaluacion> Evaluaciones = parseaEvaluacion(trozos[6].strip());
+		
+		return new Visita(email, ciudad, CP, FechaHoraEntrada, FechaHoraSalida, temperatura, Evaluaciones);
+	}
+	
+	private static List<Evaluacion> parseaEvaluacion(String trozo) {
+		List<Evaluacion> res = new ArrayList<Evaluacion>();
+		String limpia = trozo.replace("[", "").replace("]", "");
+		
+		String[] hamburgueserias = limpia.split("-");
+		for (String h:hamburgueserias) {
+			String[] partes = h.split(":");
+			String nombre = partes[0].strip();
+			String eval = partes[1].strip();
+			String eval_limpio = eval.replace("(", "").replace(")", "");
+			String[] notas = eval_limpio.split(",");
+			Integer Presentacion = Integer.valueOf(notas[0].strip());
+			Integer PuntoCarne = Integer.valueOf(notas[1].strip());
+			Integer CalidadIng = Integer.valueOf(notas[2].strip());
+			Integer CalidadPan = Integer.valueOf(notas[3].strip());
+			Evaluacion ev = new Evaluacion(nombre, Presentacion, PuntoCarne, CalidadIng, CalidadPan);
+			res.add(ev);
+		}
+
+		return res;
+	}
+	
+	private static LocalDateTime parseaFechaHora(String trozo) {
+		String[] fechaHora = trozo.strip().split(" ");
+		LocalDate fecha = LocalDate.parse(fechaHora[0], DateTimeFormatter.ofPattern("d/M/y"));
+		LocalTime hora = LocalTime.parse(fechaHora[1]);
+		LocalDateTime FechaHora = LocalDateTime.of(fecha, hora);
+		
+		return FechaHora;
+	}
+}

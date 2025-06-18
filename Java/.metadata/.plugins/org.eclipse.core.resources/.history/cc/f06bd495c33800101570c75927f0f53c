@@ -1,0 +1,98 @@
+package fp.votaciones.tipos;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class EstadisticasEncuestas {
+	private List<Encuesta> encuestas;
+	
+	public EstadisticasEncuestas (Stream<Encuesta> encuesta) {
+		this.encuestas = encuesta.collect(Collectors.toList());
+	}
+
+	public List<Encuesta> getEncuestas() {
+		return new ArrayList<Encuesta>(encuestas);
+	}
+
+	@Override
+	public String toString() {
+		return "EstadisticasEncuestas [encuestas=" + encuestas + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(encuestas);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EstadisticasEncuestas other = (EstadisticasEncuestas) obj;
+		return Objects.equals(encuestas, other.encuestas);
+	}
+	
+	public Double getMediaNumEncuestadosConsultorayFecha (String consultora, LocalDate fechaMaxima) {
+		return encuestas.stream()
+				.filter(e->e.getConsultora().equals(consultora) &&
+						e.getFechaFin().isBefore(fechaMaxima))	// Se filtra y nos dan las lineas del CSV que cuadran
+				.mapToInt(Encuesta::getnEncuestados)	// Sacamos un map con los nEncuestados de las lineas que hemos filtrado
+				.average().orElse(0.0);		// Hacemos la media y sino se puede se devuelve 0.0
+	}
+	
+	public Encuesta getEncuestaMasEncuestadosPorDia(TipoEncuesta tipo) {
+		return encuestas.stream()
+				.filter(e->e.getTipo().equals(tipo))
+				.max(Comparator.comparing(Encuesta::getRatioEncuestadosDia))
+				.get();
+	}
+	
+	public List<String> getPartidosMasFrecuentesOrdenados(Integer n) {
+	    return encuestas.stream()
+	        .flatMap(e -> e.getResultados().stream())
+	        .map(Resultado::Partido)
+	        .collect(Collectors.groupingBy(partido -> partido, Collectors.counting()))
+	        .entrySet().stream()
+	        .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+	        .limit(n)
+	        .map(Map.Entry::getKey)
+	        .collect(Collectors.toList());
+	}
+	
+	public Map<String, SortedSet<String>> getPaisesPorPartidoMayorPorcentaje (Double umbralPorcentaje) {
+		Map<String, SortedSet<String>> res = new TreeMap<String, SortedSet<String>>();
+		
+		for (Encuesta e:encuestas) {
+			for (Resultado r:e.getResultados()) {
+				if (r.Resultado() > umbralPorcentaje) {
+					String partido = r.Partido();
+					if(!res.containsKey(partido)) {
+						res.get(partido).add(e.getPais());
+					} else {
+						SortedSet<String> paises = new TreeSet<String>();
+						paises.add(e.getPais());
+						res.put(partido, paises);
+					}
+				}
+			}
+		}
+		
+		return res;
+	}
+
+	
+	
+}

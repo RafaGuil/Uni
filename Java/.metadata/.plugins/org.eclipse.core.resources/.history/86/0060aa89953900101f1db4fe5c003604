@@ -1,0 +1,78 @@
+package fp.buses.tipos;
+
+import java.time.Duration;
+import java.util.List;
+
+import fp.utiles.Checkers;
+
+public class Viaje {
+	private Double precio;
+	private Integer distancia;
+	private Duration duracion;
+	private TipoViaje tipo;
+	private List<Parada> trayecto;
+	
+	public Viaje(Double precio, Integer distancia, Duration duracion, 
+			TipoViaje tipo, List<Parada> trayecto) {
+		setPrecio(precio);
+		setDistancia(distancia);
+		setDuracion(duracion);
+		setTipo(tipo);
+		setTrayecto(trayecto);
+	}
+
+	public Double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Double precio) {
+		Checkers.check("La precio debe ser mayor que cero.", 
+				precio > 0);
+		this.precio = precio;
+	}
+
+	public Integer getDistancia() {
+		return distancia;
+	}
+
+	public void setDistancia(Integer distancia) {
+		Checkers.check("La distancia debe ser mayor que cero.", 
+				distancia > 0);
+		this.distancia = distancia;
+	}
+
+	public Duration getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(Duration duracion) {
+		Checkers.check("La duración debe ser mayor que cero.", 
+				!duracion.isZero());
+		this.duracion = duracion;
+	}
+
+	public TipoViaje getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoViaje tipo) {
+		if (trayecto.size() == 2) {
+			Checkers.check("El tipo de viaje de un viaje con solo un origen y un destino no puede ser TRANSBORDO.", 
+				!tipo.equals(TipoViaje.valueOf("TRANSBORDO")));
+		}
+		this.tipo = tipo;
+	}
+
+	public List<Parada> getTrayecto() {
+		return trayecto;
+	}
+
+	public void setTrayecto(List<Parada> trayecto) {
+		Checkers.check("El trayecto debe tener al menos dos paradas (origen y destino).", 
+				trayecto.size() >= 2);
+		this.trayecto = trayecto;
+	}
+	
+		
+	
+}

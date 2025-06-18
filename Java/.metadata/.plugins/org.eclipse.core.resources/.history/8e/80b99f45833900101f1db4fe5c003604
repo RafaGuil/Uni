@@ -1,0 +1,25 @@
+package fp.examenes.tipos.test;
+
+import java.util.List;
+
+import fp.examenes.tipos.Examen;
+import fp.examenes.tipos.FactoriaExamenes;
+
+public class testExamenes {
+	public static void main(String[] args) {
+		List<Examen> lineas = FactoriaExamenes.leeExamenes("data/examenes.csv");
+		testFactoriaExamenes(lineas);
+	}
+	
+	private static void testFactoriaExamenes(List<Examen> lineas) {
+		System.out.println("Test Factoria Examenes");
+		
+		try {
+			for (int i = 0; i < lineas.size(); i++) {
+				System.out.println("Examen " + i + lineas.get(i));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

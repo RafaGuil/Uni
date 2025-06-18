@@ -1,0 +1,36 @@
+package fp.votaciones.tipos.test;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import fp.votaciones.tipos.Encuesta;
+import fp.votaciones.tipos.EstadisticasEncuestas;
+import fp.votaciones.tipos.FactoriaEncuestas;
+
+public class TestEncuesta {
+	public static void main(String[] args) {
+		List<Encuesta> lineas = FactoriaEncuestas.leeEncuesta("data/encuestas_electorales.csv");
+		testFactoriaEncuesta(lineas);
+		testGetMediaNumEncuestadosConsultorayFecha(lineas);
+	}
+	
+	private static void testFactoriaEncuesta(List<Encuesta> lineas) {
+		System.out.println("Test Factoria Encuestas");
+		
+		try {
+			for (int i=1; i<lineas.size(); i++) {
+				System.out.println("Encuesta "+ i +lineas.get(i));
+			}
+		} catch (Exception e) {
+			System.out.println("Excepción inesperada capturada:\n   " + e);	
+		}
+	}
+	
+	private static void testGetMediaNumEncuestadosConsultorayFecha(List<Encuesta> lineas) {
+		EstadisticasEncuestas est = new EstadisticasEncuestas(lineas.stream());
+		
+		Double res = est.getMediaNumEncuestadosConsultorayFecha("Consultora A", LocalDate.of(2024, 05, 29));
+
+		System.out.println("Media: " + res);
+	}
+}

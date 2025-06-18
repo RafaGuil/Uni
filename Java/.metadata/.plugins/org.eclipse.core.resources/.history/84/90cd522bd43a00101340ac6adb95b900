@@ -1,0 +1,11 @@
+package fp.carrera.tipos;
+
+import java.time.LocalDateTime;
+
+public class Carrera {
+	private String id;
+	private String localidad;
+	private LocalDateTime fechaHora;
+	private TipoCarrera modalidad;
+	
+}

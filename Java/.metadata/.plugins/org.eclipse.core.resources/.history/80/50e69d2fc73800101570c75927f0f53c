@@ -1,0 +1,18 @@
+package fp.examenes.tipos;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.List;
+
+public class Examen {
+	private String asignatura;
+	private Integer curso;
+	private LocalDateTime fechaHora;
+	private Duration duracion;
+	private TipoExamen tipo;
+	private Integer asistentes;
+	private Boolean inscripcion;
+	private List<Aula> aula;
+	
+	
+}

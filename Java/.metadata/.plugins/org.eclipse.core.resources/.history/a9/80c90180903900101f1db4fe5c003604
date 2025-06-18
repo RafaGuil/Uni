@@ -1,0 +1,10 @@
+package fp.buses.tipos;
+
+import java.time.Duration;
+
+public class Viaje {
+	private Double precio;
+	private Integer distancia;
+	private Duration duracion;
+	private TipoViaje tipo;
+}

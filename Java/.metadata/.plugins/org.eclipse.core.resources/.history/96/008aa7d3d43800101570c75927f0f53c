@@ -1,0 +1,57 @@
+package fp.examenes.tipos;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class FactoriaExamenes {
+	public static List<Examen> leeExamenes (String fileName){
+		List<Examen> res = new ArrayList<Examen>();
+		
+		try {
+			res = Files.lines(Paths.get(fileName))
+					.skip(1)
+					.map(FactoriaExamenes::parsearExamen)
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	private static Examen parsearExamen(String linea) {
+		String[] trozos = linea.split(",");
+		
+		String asignatura = trozos[0].strip();
+		Integer curso = Integer.valueOf(trozos[1].strip());
+		LocalDate fecha = LocalDate.parse(trozos[2].strip());
+		LocalTime hora = LocalTime.parse(trozos[3].strip());
+		LocalDateTime fechaHora = LocalDateTime.of(fecha, hora);
+		Duration duracion = Duration.ofMinutes(Integer.valueOf(trozos[4].strip()));
+		TipoExamen tipo = TipoExamen.valueOf(trozos[5].strip());
+		Integer asistentes = Integer.valueOf(trozos[6].strip());
+		Boolean inscripcion = Boolean.valueOf(trozos[7].strip());
+		List<Aula> aulas = parseaAulas(trozos[8].strip());
+		
+		return new Examen(asignatura, curso, fechaHora, duracion, tipo, asistentes, inscripcion, aulas);
+	}
+	
+	private static List<Aula> parseaAulas (String trozo) {
+		List<Aula> res = new ArrayList<Aula>();
+		String[] t = trozo.split(";");
+		
+		for (String aula:t) {
+			String[] p = aula.split("-");
+			String nombre = p[0].strip();
+			Integer capacidad = Integer.valueOf(p[1].strip());
+			res.add(new Aula(nombre, capacidad));
+		}
+		return res;
+	}
+}

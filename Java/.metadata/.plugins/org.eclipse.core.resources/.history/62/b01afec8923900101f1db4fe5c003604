@@ -1,0 +1,24 @@
+package fp.buses.tipos;
+
+import java.time.Duration;
+import java.util.List;
+
+public class Viaje {
+	private Double precio;
+	private Integer distancia;
+	private Duration duracion;
+	private TipoViaje tipo;
+	private List<Parada> trayecto;
+	
+	public Viaje(Double precio, Integer distancia, Duration duracion, 
+			TipoViaje tipo, List<Parada> trayecto) {
+		this.precio = precio;
+		this.distancia = distancia;
+		this.duracion = duracion;
+		this.tipo = tipo;
+		this.trayecto = trayecto;
+	}
+	
+		
+	
+}

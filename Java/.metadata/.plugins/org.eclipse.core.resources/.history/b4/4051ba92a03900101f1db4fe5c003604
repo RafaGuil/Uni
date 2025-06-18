@@ -1,0 +1,67 @@
+package fp.buses.tipos;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import fp.utiles.Checkers;
+
+public class FactoriaViajes {
+	public static List<Viaje> leeViaje(String fileName) {
+		List<Viaje> res = new ArrayList<Viaje>();
+		
+		try {
+			res = Files.lines(Paths.get(fileName))
+					.skip(1)
+					.map(FactoriaViajes::parseaViaje)
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	private static Viaje parseaViaje(String linea) {
+		Checkers.checkNoNull(linea);
+		
+		String[] trozos = linea.split(";");
+		Double precio = Double.valueOf(trozos[0].strip());
+		Integer distancia = Integer.valueOf(trozos[1].strip());
+		Duration duracion = parseaDuracion(trozos[2].strip());
+		TipoViaje tipo = TipoViaje.valueOf(trozos[3].strip());
+		List<Parada> trayecto = parseaTrayecto(trozos[4].strip());
+		
+		return new Viaje(precio, distancia, duracion, tipo, trayecto);
+	}
+	
+	private static Duration parseaDuracion(String trozo) {
+		String[] p = trozo.split(":");
+		Integer horas = Integer.valueOf(p[0].strip());
+		Integer min = Integer.valueOf(p[1].strip());
+		Integer res = horas*60 + min;
+		
+		return Duration.ofMinutes(res);
+	}
+	
+	private static List<Parada> parseaTrayecto(String trozo) {
+		List<Parada> res = new ArrayList<Parada>();
+		
+		String limpia = trozo.replace("[", "").replace("]", "");
+		
+		String[] paradas = limpia.split(",");
+		for (String p:paradas) {
+			String[] parte = p.split("-");
+			String nombre = parte[0].strip();
+			LocalTime HoraSalida = LocalTime.parse(parte[1].strip());
+			Parada parada = new Parada(nombre, HoraSalida);
+			res.add(parada);
+		}
+		return res;
+	}
+}

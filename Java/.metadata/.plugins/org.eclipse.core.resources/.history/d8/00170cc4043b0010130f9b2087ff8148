@@ -1,0 +1,35 @@
+package fp.carrera.tipos;
+
+import java.time.Duration;
+
+import fp.utiles.Checkers;
+
+public record Participante(String IDcarrera, String Nombre, String Apellidos, Integer Edad, Sexo Sexo, Duration Duracion) {
+	public Participante {
+		Checkers.check("La edad del participante debe ser igual o superior a 17 años.", 
+				Edad >= 17);
+	}
+	
+	public Categoria getCategoria() {
+		String cat = null;
+		String sexo = null;
+		if (Sexo.equals(Sexo.HOMBRE)) {
+			sexo = "H";
+		} else {
+			sexo = "M";
+		}
+		
+		if (Edad <= 20) {
+			cat = "JUNIOR";
+		} else if (Edad <= 23) {
+			cat = "PROMESA";
+		} else if (Edad <= 39) {
+			cat = "SENIOR";
+		} else if (Edad > 40) {
+			cat = "VETERANO";
+		}
+		
+		return Categoria.valueOf(cat + "_" + sexo);
+	}
+
+}

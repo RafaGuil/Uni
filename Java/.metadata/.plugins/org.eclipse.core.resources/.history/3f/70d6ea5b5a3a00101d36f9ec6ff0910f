@@ -1,0 +1,91 @@
+package fp.burguer.tipos;
+
+import java.time.Duration;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.w3c.dom.css.Counter;
+
+public class Competicion {
+	private SortedSet<Visita> visitas;
+	
+	private static final Comparator<Visita> CMP_CP =
+			Comparator.comparing(Visita::getCodigoPostal)
+			.thenComparing(Comparator.naturalOrder());
+
+	public Competicion(Stream<Visita> stream) {
+		this.visitas = stream.collect(Collectors.toCollection(() -> new TreeSet<>(CMP_CP)));
+	}
+	
+	public SortedSet<Visita> getVisitas() {
+		SortedSet<Visita> ss= new TreeSet<>(CMP_CP);
+		ss.addAll(visitas);
+		return ss;
+	}
+
+	@Override
+	public String toString() {
+		return "Competicion [visitas=" + visitas + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(visitas);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Competicion other = (Competicion) obj;
+		return Objects.equals(visitas, other.visitas);
+	}
+	
+	public SortedSet<String> getEmailsOrdenados (Duration d) {
+		double tempMedia = visitas.stream()
+				.mapToDouble(Visita::getTemperatura)
+				.average()
+				.getAsDouble();
+		
+		return visitas.stream()
+				.filter(v->v.getDuracion().compareTo(d) > 0 && 
+						v.getTemperatura() < tempMedia)
+				.map(Visita::getEmail)
+				.collect(Collectors.toCollection(TreeSet::new));
+	}
+	
+	public Integer getTotalVisitasComilones() {
+		Double mediaEvaluaciones = visitas.stream()
+				.mapToDouble(Visita::getNEvaluaciones)
+				.average()
+				.getAsDouble();
+		
+		Long res = visitas.stream()
+				.filter(v->v.getNEvaluaciones() > mediaEvaluaciones)
+				.map(Visita::getEmail)
+				.count();
+		
+		return res.intValue();
+	}
+	
+	public String getPeorHamburgueseriaPorCalidadIngredientes() {
+		return visitas.stream()
+				.flatMap(v->v.getEvaluaciones().stream())
+				.collect(Collectors.groupingBy(Evaluacion::Hamburgueseria, 
+						Collectors.averagingDouble(Evaluacion::CalidadIng)))
+				.entrySet().stream()
+				.min(Comparator.comparing(Entry::getValue))
+				.map(Map.Entry::getKey)
+				.orElse(null);
+	}
+}

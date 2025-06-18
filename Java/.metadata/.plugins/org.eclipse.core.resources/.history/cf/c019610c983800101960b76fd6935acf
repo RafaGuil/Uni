@@ -1,0 +1,127 @@
+package fp.votaciones.tipos;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
+
+import fp.utiles.Checkers;
+
+public class Encuesta implements Comparable<Encuesta>{
+	private String consultora;
+	private LocalDate fechaComienzo;
+	private LocalDate fechaFin;
+	private Integer nEncuestados;
+	private String pais;
+	private TipoEncuesta tipo;
+	private Double porcentajeIndecisos;
+	private List<Resultado> resultados;
+	
+	public Encuesta(String consultora, LocalDate fechaComienzo, LocalDate fechaFin, 
+			Integer nEncuestados, String pais,TipoEncuesta tipo, 
+			Double porcentajeIndecisos, List<Resultado> resultados) {
+		
+		Checkers.check("La fecha de fin no puede ser anterior a la fecha de comienzo.", 
+				fechaComienzo.isBefore(fechaFin));
+		Checkers.check("La lista de resultados no puede estar vacía.", 
+				!resultados.isEmpty());
+		Checkers.check("El número de encuestados debe ser mayor o igual que cero.", 
+				nEncuestados >= 0);
+		
+		this.consultora = consultora;
+		this.fechaComienzo = fechaComienzo;
+		this.fechaFin = fechaFin;
+		setnEncuestados(nEncuestados);
+		this.pais = pais;
+		this.tipo = tipo;
+		setPorcentajeIndecisos(porcentajeIndecisos);
+		this.resultados = new ArrayList<>(resultados);
+	}
+
+	public Integer getnEncuestados() {
+		return nEncuestados;
+	}
+
+	public void setnEncuestados(Integer nEncuestados) {
+		this.nEncuestados = nEncuestados;
+	}
+
+	public Double getPorcentajeIndecisos() {
+		return porcentajeIndecisos;
+	}
+
+	public void setPorcentajeIndecisos(Double porcentajeIndecisos) {
+		this.porcentajeIndecisos = porcentajeIndecisos;
+	}
+
+	public String getConsultora() {
+		return consultora;
+	}
+
+	public LocalDate getFechaComienzo() {
+		return fechaComienzo;
+	}
+
+	public LocalDate getFechaFin() {
+		return fechaFin;
+	}
+
+	public String getPais() {
+		return pais;
+	}
+
+	public TipoEncuesta getTipo() {
+		return tipo;
+	}
+
+	public List<Resultado> getResultados() {
+		return new ArrayList<Resultado>(resultados);
+	}
+	
+	public Double getRatioEncuestadosDia() {
+		Integer nDías = Period.between(fechaFin, fechaComienzo).getDays();
+		return nEncuestados*1.0 /nDías; //El 1.0 es para que se transforme a Double (Bombardeen Java)
+	}
+
+	@Override
+	public String toString() {
+		return "Encuesta [consultora=" + consultora + ", fechaComienzo=" + fechaComienzo + ", fechaFin=" + fechaFin
+				+ ", nEncuestados=" + nEncuestados + ", pais=" + pais + ", tipo=" + tipo + ", porcentajeIndecisos="
+				+ porcentajeIndecisos + ", resultados=" + resultados + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(consultora, fechaComienzo, fechaFin, nEncuestados);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Encuesta other = (Encuesta) obj;
+		return Objects.equals(consultora, other.consultora) && Objects.equals(fechaComienzo, other.fechaComienzo)
+				&& Objects.equals(fechaFin, other.fechaFin) && Objects.equals(nEncuestados, other.nEncuestados);
+	}
+
+	@Override
+	public int compareTo(Encuesta o) {
+		int res = getFechaComienzo().compareTo(o.getFechaComienzo());
+		if (res == 0) {
+			res = getFechaFin().compareTo(o.getFechaFin());
+			if (res == 0) {
+				res = getConsultora().compareTo(o.getConsultora());
+				if (res == 0) {
+					res = getnEncuestados().compareTo(o.getnEncuestados());
+				}
+			}
+		}
+		return res;
+	}
+}

@@ -1,0 +1,48 @@
+package fp.examenes.tipos;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class CalendarioExamenes {
+	private List<Examen> examenes;
+
+	public CalendarioExamenes(Stream<Examen> examenes) {
+		this.examenes = examenes.collect(Collectors.toList());
+	}
+
+	public List<Examen> getExamenes() {
+		return examenes;
+	}
+	
+	public Integer getNExamenes() {
+		return examenes.size();
+	}
+
+	@Override
+	public String toString() {
+		return "CalendarioExamenes [Examenes=" + examenes + "]";
+	}
+	
+	public Map<String, Set<Examen>> getExamenesPorAula() {
+		Map<String, Set<Examen>> res = new HashMap<String, Set<Examen>>();
+		
+		for (Examen examen : examenes) {
+			for (Aula a : examen.getAula()) {
+				if (res.containsKey(a.Nombre())) {
+					res.get(a.Nombre()).add(examen);
+				} else {
+					Set<Examen> s = new TreeSet<Examen>();
+					s.add(examen);
+					res.put(a.Nombre(), s);
+				}
+			}
+		}
+		return res;
+	}
+}

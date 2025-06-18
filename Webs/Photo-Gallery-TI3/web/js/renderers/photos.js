@@ -21,6 +21,7 @@ const photoRenderer = {
         let newCard = parseHTML(html);
         return newCard;
     },
+    
     asDetails: function (photo) {
         let html = `<div class="photo-details">
     <h3>${photo.title}</h3>

@@ -1,0 +1,81 @@
+package fp.carrera.tipos;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import fp.utiles.Checkers;
+
+public class FactoriaCarreras {
+	public static Carreras leeCarreras(String nomFichCarreras, String nomFichParticipantes) {
+		Carreras res = null;
+		try {
+			List<Carrera> carreras = Files.lines(Paths.get(nomFichCarreras))
+									.skip(1)
+									.map(FactoriaCarreras::parseaCarrera)
+									.collect(Collectors.toList());
+			Map<String, List<Participante>> participantes =
+			leeParticipantes(nomFichParticipantes);
+			for (Carrera c: carreras) {
+				c.añadeParticipantes(participantes.get(c.getId()));
+			}
+			res = new Carreras(carreras.stream());
+		} catch (IOException e) {
+		e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	private static Carrera parseaCarrera(String strCarrera) {
+		Checkers.checkNoNull(strCarrera);
+		
+		String[] trozos = strCarrera.split(",");
+		Checkers.check("Formato no válido <" + strCarrera + ">", trozos.length == 6);
+		LocalDateTime fechaHora = LocalDateTime.parse(trozos[2].trim(),DateTimeFormatter.ofPattern("yyyy-M-d H:m")); //También es válido el patrón "yyyy-MM-dd H:mm"
+		TipoCarrera modalidad = TipoCarrera.valueOf(trozos[3].trim());
+		Integer distancia = Integer.valueOf(trozos[4].trim());
+		Integer desnivel = Integer.valueOf(trozos[5].trim());
+
+		if (modalidad == TipoCarrera.MONTAÑA) {
+			// Creamos una CarreraMontaña
+			return new CarreraMontaña(trozos[0].trim(), trozos[1].trim(), fechaHora, modalidad, distancia, desnivel);
+		} else {
+			// Creamos una Carrera normal
+			return new Carrera(trozos[0].trim(), trozos[1].trim(), fechaHora, modalidad, distancia, desnivel);
+		}	
+	}
+	
+	private static Map<String, List<Participante>> leeParticipantes(String nombre_fichero) {
+		Map<String, List<Participante>> m = new HashMap<>();
+		try {
+			m = Files.lines(Paths.get(nombre_fichero),StandardCharsets.UTF_8)
+						.skip(1)
+						.map(FactoriaCarreras::parseaParticipante)
+						.collect(Collectors.groupingBy(Participante::IDcarrera));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return m;
+	}
+	
+	public static Participante parseaParticipante(String linea) {
+		// 0,Ana,Torres García,19,HOMBRE,1:08:13.736016
+		// la duración tiene que tener este formato en el fichero: PT1H8M13.736016S
+		Checkers.checkNoNull(linea);
+		String[] part = linea.split(",");
+		Checkers.check("Formato de línea incorrecto", part.length == 6);
+		Sexo sexo = Sexo.valueOf(part[4].trim());
+		Duration dur = Duration.parse(part[5].trim());
+		return new Participante(part[0].trim(), part[1].trim(), part[2].trim(), Integer.valueOf(part[3].trim()), sexo, dur);
+	}
+
+}

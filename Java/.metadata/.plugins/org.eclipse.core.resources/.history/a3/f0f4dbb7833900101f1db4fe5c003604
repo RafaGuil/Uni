@@ -1,0 +1,40 @@
+package fp.examenes.tipos.test;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import fp.examenes.tipos.CalendarioExamenes;
+import fp.examenes.tipos.Examen;
+import fp.examenes.tipos.FactoriaExamenes;
+
+public class testExamenes {
+	public static void main(String[] args) {
+		List<Examen> lineas = FactoriaExamenes.leeExamenes("data/examenes.csv");
+		//testFactoriaExamenes(lineas);
+		testGetExamenesPorAula(lineas);
+	}
+	
+	private static void testFactoriaExamenes(List<Examen> lineas) {
+		System.out.println("Test Factoria Examenes");
+		
+		try {
+			for (int i = 0; i < lineas.size(); i++) {
+				System.out.println("Examen " + i + lineas.get(i));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void testGetExamenesPorAula(List<Examen> lineas) {
+		CalendarioExamenes cal = new CalendarioExamenes(lineas.stream());
+		
+		System.out.println("EJERCICIO 4.1===================================================================");
+		Map<String, Set<Examen>> res = cal.getExamenesPorAula();
+		for (int i = 0; i < res.size(); i++) {
+			System.out.println("Exámenes por aula" + res.get(i));
+		}
+		
+	}
+}

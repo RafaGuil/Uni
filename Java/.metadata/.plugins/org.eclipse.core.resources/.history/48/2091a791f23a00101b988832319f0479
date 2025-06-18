@@ -1,0 +1,34 @@
+package fp.carrera.tipos;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class FactoriaCarreras {
+	public static Carreras leeCarreras(String nomFichCarreras, String nomFichParticipantes) {
+		Carreras res = null;
+		try {
+			List<Carrera> carreras = Files.lines(Paths.get(nomFichCarreras))
+									.skip(1)
+									.map(FactoriaCarreras::parseaCarrera)
+									.collect(Collectors.toList());
+			Map<String, List<Participante>> participantes =
+			leeParticipantes(nomFichParticipantes);
+			for (Carrera c: carreras) {
+				c.añadeParticipantes(participantes.get(c.getId()));
+			}
+			res = new Carreras(carreras.stream());
+		} catch (IOException e) {
+		e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	private static Carrera parseaCarrera(String lineas) {
+		
+	}
+}

@@ -1,0 +1,42 @@
+package fp.burguer.tipos;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import fp.utiles.Checkers;
+
+public class FactoriaVisitas {
+	public static List<Visita> leeVisitas(String fileName) {
+		List<Visita> res = new ArrayList<Visita>();
+		
+		try {
+			res = Files.lines(Paths.get(fileName))
+					.skip(1)
+					.map(FactoriaVisitas::parseaVisitas)
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static Visita parseaVisitas(String linea) {
+		Checkers.checkNoNull(linea);
+		
+		String[] trozos = linea.split(";");
+		String email = trozos[0].strip();
+		String ciudad = trozos[1].strip();
+		String CP = trozos[2].strip();
+		String[] fechaHora = trozos[3].strip().split(" ");
+		LocalDate fecha = LocalDate.parse(fechaHora[0]);
+		LocalTime hora = LocalTime.parse(fechaHora[1]);
+		LocalDateTime FechaHoraEntrada = LocalDateTime.of(fecha, hora);
+		Integer temperatura = Integer.valueOf(trozos[4].strip());
+	}
+}

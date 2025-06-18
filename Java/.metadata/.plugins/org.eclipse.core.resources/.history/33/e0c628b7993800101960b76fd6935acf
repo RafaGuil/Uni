@@ -1,0 +1,12 @@
+package fp.votaciones.tipos.test;
+
+import fp.votaciones.tipos.Encuesta;
+
+public class TestEncuesta {
+	public static void main(String[] args) {
+		Encuesta e1 = new Encuesta("Consultora B",2024-05-18,2024-05-27,3203,Espana,
+				Internet,16.15,'(Partido 1: 42.29); (Partido 2: 49.52); (Partido 3: 6.01); 
+				(Partido 4: 1.76); (Partido 5: 0.18); (Partido 6: 0.23)')
+		System.out.println(e1);
+	}
+}

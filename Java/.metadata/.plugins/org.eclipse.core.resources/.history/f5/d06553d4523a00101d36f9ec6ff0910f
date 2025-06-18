@@ -1,0 +1,7 @@
+package fp.burguer.tipos;
+
+import java.util.SortedSet;
+
+public class Competicion {
+	private SortedSet<Visita> visitas;
+}

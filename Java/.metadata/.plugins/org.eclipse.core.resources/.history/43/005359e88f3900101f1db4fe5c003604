@@ -1,0 +1,5 @@
+package fp.buses.tipos;
+
+public class Viaje {
+
+}

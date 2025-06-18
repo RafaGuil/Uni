@@ -1,0 +1,21 @@
+package fp.examenes.tipos;
+
+import java.util.List;
+
+public class CalendarioExamenes {
+	private List<Examen> Examenes;
+
+	public CalendarioExamenes(List<Examen> examenes) {
+		Examenes = examenes;
+	}
+
+	public List<Examen> getExamenes() {
+		return Examenes;
+	}
+	
+	public Integer getNExamenes() {
+		return Examenes.size();
+	}
+	
+	
+}

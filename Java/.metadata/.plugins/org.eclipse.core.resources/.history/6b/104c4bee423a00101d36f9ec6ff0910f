@@ -1,0 +1,10 @@
+package fp.burguer.tipos;
+
+public record Evaluacion(String Hamburgueseria, Integer Presentacion, Integer PuntoCarne, 
+		Integer CalidadIng, Integer CalidadPan) {
+	public Evaluacion() {
+			
+		}
+	public Double getPuntuacionFinal() {
+	}
+}

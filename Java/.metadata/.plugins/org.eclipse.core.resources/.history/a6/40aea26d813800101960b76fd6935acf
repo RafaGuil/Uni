@@ -1,0 +1,10 @@
+package fp.votaciones.tipos;
+
+import fp.utiles.Checkers;
+
+public record Resultado(String Partido, Double Resultado) {
+	public Resultado {
+		Checkers.check("El porcentaje no puede ser negativo.", 
+				Resultado >= 0);
+	}
+}

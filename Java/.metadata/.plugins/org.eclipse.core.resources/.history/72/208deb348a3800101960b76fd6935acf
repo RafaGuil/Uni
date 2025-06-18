@@ -1,0 +1,40 @@
+package fp.votaciones.tipos;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import fp.utiles.Checkers;
+
+public class Encuesta {
+	private String consultora;
+	private LocalDate fechaComienzo;
+	private LocalDate fechaFin;
+	private Integer nEncuestados;
+	private String pais;
+	private TipoEncuesta tipo;
+	private Double porcentajeIndecisos;
+	private List<Resultado> resultados;
+	
+	public Encuesta(String consultora, LocalDate fechaComienzo, LocalDate fechaFin, 
+			Integer nEncuestados, String pais,TipoEncuesta tipo, 
+			Double porcentajeIndecisos, List<Resultado> resultados) {
+		
+		Checkers.check("La fecha de fin no puede ser anterior a la fecha de comienzo.", 
+				fechaComienzo.isBefore(fechaFin));
+		Checkers.check("La lista de resultados no puede estar vacía.", 
+				!resultados.isEmpty());
+		Checkers.check("El número de encuestados debe ser mayor o igual que cero.", 
+				nEncuestados >= 0);
+		
+		this.consultora = consultora;
+		this.fechaComienzo = fechaComienzo;
+		this.fechaFin = fechaFin;
+		this.nEncuestados = nEncuestados;
+		this.pais = pais;
+		this.tipo = tipo;
+		this.porcentajeIndecisos = porcentajeIndecisos;
+		this.resultados = resultados;
+	}
+	
+	
+}

@@ -1,0 +1,27 @@
+package fp.carrera.tipos;
+
+import java.time.LocalDateTime;
+
+public class CarreraMontaña extends Carrera {
+	private Boolean tieneZonasTecnicas;
+	private Boolean requiereEquipamientoEspecial;
+	
+	public CarreraMontaña(String id, String localidad, LocalDateTime fechaHora, TipoCarrera modalidad,
+			Integer distancia, Integer desnivel, Boolean tieneZonasTecnicas, Boolean requiereEquipamientoEspecial) {
+		super(id, localidad, fechaHora, modalidad, distancia, desnivel);
+		this.requiereEquipamientoEspecial = requiereEquipamientoEspecial;
+		this.tieneZonasTecnicas = tieneZonasTecnicas;
+	}
+
+	public Boolean getTieneZonasTecnicas() {
+		return tieneZonasTecnicas;
+	}
+
+	public Boolean getRequiereEquipamientoEspecial() {
+		return requiereEquipamientoEspecial;
+	}
+	
+	
+	
+	
+}

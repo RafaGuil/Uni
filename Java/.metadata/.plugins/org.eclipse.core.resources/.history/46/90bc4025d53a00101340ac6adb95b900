@@ -1,0 +1,103 @@
+package fp.carrera.tipos;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
+
+import fp.utiles.Checkers;
+
+public class Carrera implements Comparable<Carrera> {
+	private String id;
+	private String localidad;
+	private LocalDateTime fechaHora;
+	private TipoCarrera modalidad;
+	private Integer distancia;
+	private Integer desnivel;
+	private List<Participante> participantes;
+	
+	public Carrera(String id, String localidad, LocalDateTime fechaHora, TipoCarrera modalidad, Integer distancia,
+			Integer desnivel) {
+		Checkers.check("La distancia mínima de la carrera debe ser de 7km", distancia > 7);
+		Checkers.check("El desnivel debe ser mayor o igual a 0 y menor o igual a 1km.", desnivel >= 0 && desnivel <= 1);
+		this.id = id;
+		this.localidad = localidad;
+		this.fechaHora = fechaHora;
+		this.modalidad = modalidad;
+		this.distancia = distancia;
+		this.desnivel = desnivel;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getLocalidad() {
+		return localidad;
+	}
+
+	public LocalDateTime getFechaHora() {
+		return fechaHora;
+	}
+
+	public TipoCarrera getModalidad() {
+		return modalidad;
+	}
+
+	public Integer getDistancia() {
+		return distancia;
+	}
+
+	public Integer getDesnivel() {
+		return desnivel;
+	}
+
+	public List<Participante> getParticipantes() {
+		return participantes;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(distancia, fechaHora, id, localidad);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Carrera other = (Carrera) obj;
+		return Objects.equals(distancia, other.distancia) && Objects.equals(fechaHora, other.fechaHora)
+				&& Objects.equals(id, other.id) && Objects.equals(localidad, other.localidad);
+	}
+
+	@Override
+	public String toString() {
+		return "Carrera [id=" + id + ", localidad=" + localidad + ", fechaHora=" + fechaHora + ", modalidad="
+				+ modalidad + ", distancia=" + distancia + ", desnivel=" + desnivel + "]";
+	}
+
+	@Override
+	public int compareTo(Carrera o) {
+		int res = getFechaHora().compareTo(o.getFechaHora());
+		if (res == 0) {
+			res = getLocalidad().compareTo(o.getLocalidad());
+			if (res == 0) {
+				res = getDistancia().compareTo(o.getDistancia());
+				if (res == 0) {
+					res = getId().compareTo(o.getId());
+				}
+			}
+		}
+		
+		return res;
+	}
+	
+	
+	
+	
+	
+	
+}

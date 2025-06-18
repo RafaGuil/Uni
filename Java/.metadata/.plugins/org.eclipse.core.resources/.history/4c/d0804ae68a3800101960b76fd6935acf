@@ -1,0 +1,5 @@
+package fp.votaciones.tipos.test;
+
+public class TestEncuesta {
+
+}

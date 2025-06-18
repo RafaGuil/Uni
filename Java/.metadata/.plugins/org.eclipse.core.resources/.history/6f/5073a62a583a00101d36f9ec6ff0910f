@@ -1,0 +1,21 @@
+package fp.burguer.tipos;
+
+import fp.utiles.Checkers;
+
+public record Evaluacion(String Hamburgueseria, Integer Presentacion, Integer PuntoCarne, 
+		Integer CalidadIng, Integer CalidadPan) {
+	public Evaluacion {
+		Checkers.check("El valor de valoración de la presentación debe estar comprendido entre 0 y 10.", 
+				Presentacion <= 10 && Presentacion >= 0);
+		Checkers.check("El valor de valoración del punto de la carne debe estar comprendido entre 0 y 10.", 
+				PuntoCarne <= 10 && PuntoCarne >= 0);
+		Checkers.check("El valor de valoración de la calidad de los ingredientes debe estar comprendido entre 0 y 10.", 
+				CalidadIng <= 10 && CalidadIng >= 0);
+		Checkers.check("El valor de valoración de la calidad del pan debe estar comprendido entre 0 y 10.", 
+				CalidadPan <= 10 && CalidadPan >= 0);
+	}
+	
+	public Double getP() {
+		return (Presentacion+PuntoCarne+CalidadIng+CalidadPan)*1.0/4;
+	}
+}

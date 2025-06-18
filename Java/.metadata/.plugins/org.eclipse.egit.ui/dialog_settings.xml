@@ -2,7 +2,13 @@
 <section name="Workbench">
 	<list key="EGit.KnownHosts">
 		<item value="git.eclipse.org"/>
-		<item value="github.com"/>
 		<item value="bitbucket.org"/>
+		<item value="github.com"/>
+	</list>
+	<list key="RepositorySelectionPage.UsedUris">
+		<item value="https://github.com/FP-24-25/EXA-2324-1C-JAVA-Burger.git"/>
+		<item value="https://github.com/FP-24-25/EXA-2425-3C-JAVA-Buses.git"/>
+		<item value="https://github.com/FP-24-25/EXA-2324-2P-S2-Examenes.git"/>
+		<item value="https://github.com/FP-24-25/EXA-2324-2P-S1-Votaciones.git"/>
 	</list>
 </section>

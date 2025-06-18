@@ -1,0 +1,11 @@
+package fp.votaciones.tipos;
+
+import java.time.LocalDate;
+
+public class Encuesta {
+	private String consultora;
+	private LocalDate fechaComienzo;
+	private LocalDate fechaFin;
+	private Integer nEncuestados;
+	
+}

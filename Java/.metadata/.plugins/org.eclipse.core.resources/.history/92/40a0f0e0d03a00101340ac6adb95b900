@@ -1,0 +1,70 @@
+package fp.burguer.tipos.test;
+
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+
+import fp.burguer.tipos.Competicion;
+import fp.burguer.tipos.FactoriaVisitas;
+import fp.burguer.tipos.Visita;
+
+public class TestCompeticion {
+	public static void main (String[] args) {
+		List<Visita> lineas = FactoriaVisitas.leeVisitas("data/evaluaciones.csv");
+		
+		//testFactoriaVisitas(lineas);
+		//testGetEmailsOrdenados(lineas);
+		//testGetPeorHamburgueseriaPorCalidadIngredientes(lineas);
+		//testGetTopComilonPorCPEnDia(lineas);
+		testGetHamburgueseriaGanadora(lineas);
+		
+	}
+	
+	private static void testFactoriaVisitas(List<Visita> lineas) {
+		System.out.println("FACTORÍA = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ");
+		
+		System.out.println("Leidas " + lineas.size() + " visitas.");
+		System.out.println("Primera visita: " + lineas.get(0));
+	}
+	
+	private static void testGetEmailsOrdenados(List<Visita> lineas) {
+		Competicion comp = new Competicion(lineas.stream());
+		
+		System.out.println("EJ1 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
+		
+		Duration d1 = Duration.ofMinutes(240);
+		SortedSet<String> res = comp.getEmailsOrdenados(d1);
+		System.out.println("Los emails de las visitas con duración mayor a " + d1 + 
+				"minutos son: " + res);
+	}
+	
+	private static void testGetPeorHamburgueseriaPorCalidadIngredientes(List<Visita> lineas) {
+		Competicion comp = new Competicion(lineas.stream());
+		
+		System.out.println("EJ3 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
+		
+		String res = comp.getPeorHamburgueseriaPorCalidadIngredientes();
+		System.out.println("Si se tiene en cuenta solo la calidad de ingredientes, la peor hamburguesería es: " + res);
+	}
+	
+	private static void testGetTopComilonPorCPEnDia(List<Visita> lineas) {
+		Competicion comp = new Competicion(lineas.stream());
+		
+		System.out.println("EJ4 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
+		
+		LocalDate d = LocalDate.of(2024, 06, 02);
+		Map<String, String> res = comp.getTopComilonPorCPEnDia(d);
+		System.out.println("En el día " + d + " la persona que más comió de cada CP es: " + res);
+	}
+	
+	private static void testGetHamburgueseriaGanadora(List<Visita> lineas) {
+		Competicion comp = new Competicion(lineas.stream());
+		
+		System.out.println("EJ4 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =");
+		
+		String res = comp.getHamburgueseriaGanadora();
+		System.out.println("La hamburguesería ganadora es: " + res);
+	}
+}

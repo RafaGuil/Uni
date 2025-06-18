@@ -1,0 +1,51 @@
+package fp.carrera.tipos.test;
+
+import java.util.List;
+import java.util.stream.Stream;
+
+import fp.carrera.tipos.Carrera;
+import fp.carrera.tipos.Carreras;
+import fp.carrera.tipos.FactoriaCarreras;
+import fp.carrera.tipos.Participante;
+
+public class TestCarrera {
+	public static void main(String[] args) {
+		Carreras lineas = FactoriaCarreras.leeCarreras("data/csv1.csv", "data/csv2.csv");
+		
+		//testFactoriaCarreras(lineas);
+		//testCarreraMayorDesnivelParticipante(lineas);
+		//testTiempoMedioCarrera(lineas);
+		testGetParticipantesCarreraMontañaPorId(lineas);
+	}
+	
+	private static void testFactoriaCarreras(Carreras lineas) {
+		System.out.println("Factoria Carreras: Se han leido " + lineas.getNCarreras() + " carreras, las cuales son:");
+		
+		System.out.println(lineas);
+	}
+	
+	private static void testCarreraMayorDesnivelParticipante(Carreras lineas) {
+		String n1 = "Elena";
+		String a1 = "Blanco Vázquez";
+		Carrera c = lineas.carreraMayorDesnivelParticipante(n1, a1);
+		
+		System.out.println("----- Carrera con mayor desnivel de participante: --------");
+		System.out.println("La carrera con mayor desnivel del participante " + n1 + a1 + " es: " + c);
+	}
+	
+	private static void testTiempoMedioCarrera(Carreras lineas) {
+		String id1 = "medmar_sev_24";
+		Double c = lineas.tiempoMedioCarrera(id1);
+		
+		System.out.println("----- Tiempo medio de carrera: --------");
+		System.out.println(id1 + ": " + c);
+	}
+	
+	private static void testGetParticipantesCarreraMontañaPorId(Carreras lineas) {
+		String id1 = "medmar_sev_24";
+		List<Participante> c = lineas.getParticipantesCarreraMontañaPorId(id1);
+		
+		System.out.println("----- Tiempo medio de carrera: --------");
+		System.out.println(id1 + ": " + c);
+	}
+}
