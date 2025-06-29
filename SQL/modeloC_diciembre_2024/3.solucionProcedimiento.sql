@@ -1,6 +1,6 @@
 DELIMITER //
 
-DROP PROCEDURE bonificar_pedido_retrasado;
+DROP PROCEDURE IF EXISTS bonificar_pedido_retrasado;
 CREATE PROCEDURE bonificar_pedido_retrasado(IN p_pedidoId INT)
 -- incluya su solución a continuación
 BEGIN 
@@ -41,4 +41,4 @@ END //
 -- fin de su solución
 DELIMITER ;
 
-CALL bonificar_pedido_retrasado(1);
+-- CALL bonificar_pedido_retrasado(1);
