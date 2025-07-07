@@ -21,10 +21,10 @@ BEGIN
     LIMIT 1;
 
     -- Si ya hay productos en el pedido, y su tipo es distinto al nuevo, lanzar error
-    IF tipo_existente IS NOT NULL AND tipo_existente != tipo_nuevo_producto THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Un mismo pedido no puede incluir productos físicos y digitales.';
-    END IF;
+   IF tipo_existente IS NOT NULL AND tipo_existente != tipo_nuevo_producto THEN
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Un mismo pedido no puede incluir productos físicos y digitales.';
+   END IF;
 
 END //
 
